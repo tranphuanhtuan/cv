@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trần Phú Anh Tuấn | Supply Chain Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CORE CONFIGURATION & THEMING --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        :root {
+            --primary: #0f172a;       /* Xanh Navy đậm - Uy tín doanh nghiệp */
+            --accent: #2563eb;        /* Xanh Royal - Linh hoạt, công nghệ */
+            --accent-light: #eff6ff;  /* Nền xanh nhạt làm điểm nhấn */
+            --bg-site: #f8fafc;       /* Nền tổng thể sạch sẽ, sáng sủa */
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --white: #ffffff;
+            --radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+        }
+        body {
+            background-color: var(--bg-site);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- LAYOUT ĐỘC LẬP (SPA ARCHITECTURE) --- */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .page-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 80px 24px 40px 24px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .section-panel {
+            display: none; /* Mặc định ẩn tất cả các trang */
+            width: 100%;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        .section-panel.active {
+            display: block; /* Chỉ hiển thị trang đang được kích hoạt */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+        }
+        .logo {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--primary);
+            letter-spacing: -0.03em;
+        }
+        .logo span {
+            color: var(--accent);
+        }
+        .nav-menu {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 1.4rem;
+            padding: 10px;
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+        .nav-toggle:hover {
+            background-color: rgba(37, 99, 235, 0.08);
+        }
+        .nav-item {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .nav-item:hover, .nav-item.active {
+            color: var(--accent);
+            background-color: var(--accent-light);
+        }
+
+        /* --- TIÊU ĐỀ TRANG CHUNG --- */
+        .page-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 32px;
+            letter-spacing: -0.03em;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* ==========================================
+           TRANG 1: TRANG CHỦ (HERO)
+        ========================================== */
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: flex-start;
+            gap: 48px;
+            width: 100%;
+            min-height: calc(100vh - 140px);
+        }
+        .hero-left {
+            margin-top: 60px;
+        }
+        .hero-left h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 8px;
+        }
+        .hero-left .job-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+        .hero-left p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            margin-bottom: 40px;
+        }
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+        .social-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--white);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .social-btn:hover {
+            background-color: var(--accent);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+        /* Hình ảnh Trang chủ: nằm hẳn tự do trên nền, không khung bọc */
+        .hero-right {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            background-color: var(--bg-site);
+            border-radius: 0 32px 32px 0;
+            overflow: hidden;
+            margin-bottom: -40px;
+            padding-bottom: 40px;
+        }
+        .hero-no-frame-img {
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            max-height: none;
+            min-height: 0;
+            overflow: hidden;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        .hero-no-frame-img img.hero-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ==========================================
+           TRANG 2: ABOUT ME
+        ========================================== */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 64px;
+            align-items: center;
+        }
+        .about-left p {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            text-align: justify;
+        }
+        .about-highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 32px;
+        }
+        .highlight-item {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid #edf2f7;
+            box-shadow: var(--shadow);
+        }
+        .highlight-item h4 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .highlight-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+            margin-top: 4px;
+        }
+        .about-right {
+            /* container to enforce square crop */
+        }
+        .about-right-placeholder {
+            width: 100%;
+            aspect-ratio: 1 / 1; /* vuông */
+            max-height: 450px; /* giới hạn chiều cao */
+            background-color: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden; /* ẩn phần thừa (phần trên sẽ bị cắt) */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            box-shadow: var(--shadow);
+        }
+        .about-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* cắt và lấp kín khung vuông */
+            object-position: center 90%; /* dịch xuống để cắt bớt phần trên */
+            display: block;
+        }
+
+        /* ==========================================
+           TRANG 3: DỰ ÁN (PROJECTS)
+        ========================================== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+        .project-card {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid #edf2f7;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.06);
+        }
+        .project-img-holder {
+            width: 100%;
+            height: 190px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2.5rem;
+            overflow: hidden;
+        }
+        .project-img-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .project-details {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .project-details h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .project-details p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .project-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        /* ==========================================
+           TRANG 4: KỸ NĂNG (SKILLS + INTERACTION)
+        ========================================== */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .skill-group-box {
+            background-color: var(--white);
+            padding: 32px;
+            border-radius: var(--radius);
+            border: 1px solid #edf2f7;
+            box-shadow: var(--shadow);
+        }
+        .skill-group-box h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .skill-group-box h3 i {
+            color: var(--accent);
+        }
+        .skill-tags-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skill-clickable-tag {
+            background-color: var(--bg-site);
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        .skill-clickable-tag:hover {
+            background-color: var(--accent);
+            color: var(--white);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        /* Khu vực hiển thị kết quả lọc dự án liên quan */
+        .filtered-results-area {
+            margin-top: 40px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 32px;
+            display: none;
+        }
+        .filtered-title-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .clear-filter-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        /* ==========================================
+           TRANG 5: THÀNH TÍCH (ACHIEVEMENTS - HORIZONTAL LIST)
+        ========================================== */
+        .horizontal-scroll-container {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            padding: 12px 4px 32px 4px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+        }
+        .horizontal-scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .horizontal-scroll-container::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 4px;
+        }
+        .achievement-item-card {
+            flex: 0 0 350px;
+            scroll-snap-align: start;
+            background-color: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid #edf2f7;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .achievement-item-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.06);
+        }
+        .achievement-img-wrapper {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+            overflow: hidden;
+        }
+        .achievement-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .achievement-info {
+            padding: 24px;
+        }
+        .achievement-info .date {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+        .achievement-info h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        .achievement-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================
+           TRANG 6: LIÊN HỆ (CONTACT)
+        ========================================== */
+        .contact-layout {
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: var(--white);
+            border-radius: var(--radius);
+            padding: 48px;
+            border: 1px solid #edf2f7;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        .contact-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 32px 0;
+        }
+        .contact-pill-item {
+            background-color: var(--bg-site);
+            padding: 16px 24px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border: 1px solid #e2e8f0;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--primary);
+        }
+        .contact-pill-item i {
+            color: var(--accent);
+            font-size: 1.25rem;
+            width: 24px;
+        }
+        .footer-txt {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 40px;
+        }
+
+        /* ==========================================
+           POPUP XEM CHI TIẾT (MODAL WINDOW)
+        ========================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 24px;
+        }
+        .modal-overlay.open {
+            opacity: 1; pointer-events: auto;
+        }
+        .modal-box {
+            background-color: var(--white);
+            max-width: 650px;
+            width: 100%;
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-pdf {
+            width: 100%;
+            height: 420px;
+            border: none;
+            margin-top: 18px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(2,6,23,0.08);
+        }
+        .modal-overlay.open .modal-box {
+            transform: scale(1);
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 24px; right: 24px;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            border: none; background: none;
+        }
+        .modal-body-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+        .modal-body-content .modal-meta {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+        .modal-body-content h4 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .modal-body-content ul {
+            padding-left: 20px;
+            margin-bottom: 16px;
+        }
+        .modal-body-content li {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            list-style-type: square;
+        }
+
+        /* --- PHẢN HỒI GIAO DIỆN (RESPONSIVE) --- */
+        @media (max-width: 968px) {
+            .hero-layout, .about-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            .hero-layout {
+                min-height: auto;
+            }
+            .hero-right {
+                align-items: center;
+            }
+            .hero-no-frame-img {
+                height: 420px;
+                max-height: none;
+                min-height: 360px;
+            }
+            .hero-left h1 { font-size: 3rem; }
+            .hero-left p { margin: 0 auto 32px auto; }
+            .social-links { justify-content: center; }
+            .about-right img, .about-right-placeholder { height: 320px; }
+            .about-highlights { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .achievement-item-card { flex: 0 0 290px; }
+            .contact-layout { padding: 24px; }
+        }
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                background-color: var(--white);
+                flex-direction: column;
+                gap: 0;
+                padding: 12px 16px 16px;
+                box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+                border-bottom-left-radius: var(--radius);
+                border-bottom-right-radius: var(--radius);
+                z-index: 1000;
+            }
+            .nav-menu.open {
+                display: flex;
+            }
+            .nav-item {
+                width: 100%;
+                padding: 14px 16px;
+                border-radius: 12px;
+            }
+            .navbar {
+                position: relative;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <div class="navbar">
+                <div class="logo">ANHTUAN<span>.SC</span></div>
+                <button class="nav-toggle" aria-label="Mở menu điều hướng" onclick="toggleMobileMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <ul class="nav-menu">
+                    <li class="nav-item active" onclick="switchTab('hero')">Trang chủ</li>
+                    <li class="nav-item" onclick="switchTab('about')">Về tôi</li>
+                    <li class="nav-item" onclick="switchTab('projects')">Dự án</li>
+                    <li class="nav-item" onclick="switchTab('skills')">Kỹ năng</li>
+                    <li class="nav-item" onclick="switchTab('achievements')">Thành tích</li>
+                    <li class="nav-item" onclick="switchTab('contact')">Liên hệ</li>
+                </ul>
+            </div>
+        </header>
+
+        <main class="page-content">
+
+            <div id="hero" class="section-panel active">
+                <div class="hero-layout">
+                    <div class="hero-left">
+                        <h1>Hi, I'm Tuấn</h1>
+                        <div class="job-title">Supply Chain Intern</div>
+                        <p>Mình kết hợp tư duy định lượng và phân tích dữ liệu để tối ưu hóa vận hành chuỗi cung ứng.</p>
+                        <div class="social-links">
+                            <a href="https://linkedin.com" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="https://github.com" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://facebook.com" target="_blank" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                    <div class="hero-right">
+                        <div class="hero-no-frame-img">
+                            <img src="Ngồi đối diện.png" alt="Avatar Trần Phú Anh Tuấn" class="hero-avatar">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="about" class="section-panel">
+                <div class="about-layout">
+                    <div class="about-left">
+                        <h2 class="page-title">Giới thiệu bản thân</h2>
+                        <p>Background: Sinh viên năm cuối ngành Kinh doanh quốc tế - UEH. Sở hữu nền tảng vững chắc về phân tích số liệu và mô hình thống kê.</p>
+                        <p>Tư duy làm việc: Luôn tiếp cận vấn đề bằng phương pháp dựa trên dữ liệu (Data-driven decisions). Có khả năng làm việc nhóm tốt và tư duy quản lý chi phí, tối ưu nguồn lực tích lũy qua các dự án thực tế.</p>
+                        <p>Mục tiêu nghề nghiệp: Thành thạo quy trình vận hành thực tế trong ngắn hạn và hướng tới trở thành một Chuyên viên Phân tích chuỗi cung ứng chuyên nghiệp trong dài hạn.</p>
+                    </div>
+                    <div class="about-right">
+                        <div class="about-right-placeholder">
+                            <img src="ngoi-lam-viec.png" alt="Ngồi làm việc - Trần Phú Anh Tuấn">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="projects" class="section-panel">
+                <h2 class="page-title">Dự án học tập & Nghiên cứu</h2>
+                <div class="projects-grid" id="main-projects-grid">
+                    </div>
+            </div>
+
+            <div id="skills" class="section-panel">
+                <h2 class="page-title">Năng lực chính</h2>
+                <p style="color: var(--text-muted); margin-bottom: 24px;"><i class="fa-solid fa-lightbulb"></i> Chọn một năng lực để xem các dự án tôi đã trực tiếp thực hiện liên quan.</p>
+
+                <div class="skills-container">
+                    <div class="skill-group-box">
+                        <h3><i class="fa-solid fa-chart-line"></i> Phân tích & Trực quan hóa dữ liệu</h3>
+                        <div class="skill-tags-flex">
+                            <div class="skill-clickable-tag" onclick="filterProjectsBySkill('Phân tích & Trực quan hóa dữ liệu')"><i class="fa-solid fa-chart-pie"></i> Xem dự án liên quan</div>
+                        </div>
+                    </div>
+
+                    <div class="skill-group-box">
+                        <h3><i class="fa-solid fa-cogs"></i> Tối ưu hóa quy trình</h3>
+                        <div class="skill-tags-flex">
+                            <div class="skill-clickable-tag" onclick="filterProjectsBySkill('Tối ưu hóa quy trình')"><i class="fa-solid fa-gears"></i> Xem dự án liên quan</div>
+                        </div>
+                    </div>
+
+                    <div class="skill-group-box">
+                        <h3><i class="fa-solid fa-truck-loading"></i> Logistics</h3>
+                        <div class="skill-tags-flex">
+                            <div class="skill-clickable-tag" onclick="filterProjectsBySkill('Logistics')"><i class="fa-solid fa-truck-fast"></i> Xem dự án liên quan</div>
+                        </div>
+                    </div>
+
+                    <div class="skill-group-box">
+                        <h3><i class="fa-solid fa-lightbulb"></i> Thiết kế giải pháp</h3>
+                        <div class="skill-tags-flex">
+                            <div class="skill-clickable-tag" onclick="filterProjectsBySkill('Thiết kế giải pháp')"><i class="fa-solid fa-pen-nib"></i> Xem dự án liên quan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filtered-results-area" id="filter-results-zone">
+                    <div class="filtered-title-wrapper">
+                        <h3 id="filter-status-heading" style="font-size: 1.25rem; color: var(--primary);"></h3>
+                        <button class="clear-filter-btn" onclick="resetSkillFilter()">Xem tất cả dự án</button>
+                    </div>
+                    <div class="projects-grid" id="filtered-projects-grid"></div>
+                </div>
+            </div>
+            <div id="achievements" class="section-panel">
+                <h2 class="page-title">Giải thưởng & Hoạt động</h2>
+                
+                <div class="horizontal-scroll-container" id="achievements-scroll-box">
+                    </div>
+            </div>
+
+            <div id="contact" class="section-panel">
+                <div class="contact-layout">
+                    <h2 style="font-size: 2rem; font-weight: 800; color: var(--primary);">Kết nối hợp tác</h2>
+                    <p class="contact-p" style="color: var(--text-muted); margin-top: 8px;">Tôi hiện đang tìm kiếm cơ hội thực tập, cọ xát trong mảng Chuỗi cung ứng và Phát triển vận hành.</p>
+                    
+                    <div class="contact-grid">
+                        <div class="contact-pill-item"><i class="fa-solid fa-envelope"></i> phuanhtuantran@gmail.com</div>
+                        <div class="contact-pill-item"><i class="fa-solid fa-phone"></i> 0328028129</div>
+                        <div class="contact-pill-item"><i class="fa-solid fa-location-dot"></i> Phường Chánh Hưng, TP.HCM</div>
+                    </div>
+                    
+                    <a href="mailto:phuanhtuantran@gmail.com" class="social-btn" style="width: auto; border-radius: 8px; padding: 0 24px; margin: 0 auto; background-color: var(--primary); color: white;">Gửi Email liên hệ trực tiếp</a>
+                    
+                    <p class="footer-txt">© 2026 Trần Phú Anh Tuấn. Portfolio</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="detail-modal" onclick="closeModal()">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-body-content" id="modal-inside-content">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // DỮ LIỆU ĐỀ ÁN SỐ HOÁ CHUẨN XỊN
+        const projectData = [
+            {
+                id: "p1",
+                title: "Hệ thống Sản xuất Tinh gọn Toyota (TPS)",
+                sub: "Học phần: Quản trị Vận hành Toàn cầu (Điểm: A)",
+                // Đường dẫn tới file PDF báo cáo (nếu có) — đặt file vào thư mục 'files'
+                pdf: "files/TOYOTAS_LEAN_MANUFACTURING_REPORT.pdf",
+                // Ảnh bìa riêng cho dự án TPS
+                thumb: "Toyota - bia.png",
+                tag: "Tối ưu hóa quy trình",
+                short: "Nghiên cứu mô hình vận hành tinh gọn Toyota, bóc tách các công cụ triệt tiêu lãng phí và đề xuất chiến lược chuyển đổi Lean thực tiễn.",
+                skills: ["Tối ưu hóa quy trình"],
+                actions: [
+                    "Phân tích cấu trúc 3 trụ cột cốt lõi TPS gồm JIT, Heijunka và hệ thống thẻ Kanban.",
+                    "Ứng dụng Sơ đồ dòng giá trị (VSM) để định vị 7 loại lãng phí (Muda).",
+                    "Đánh giá giải pháp chuyển đổi khuôn mẫu nhanh bằng kỹ thuật SMED."
+                ],
+                results: [
+                    "Nhận diện 5 gánh nặng/thách thức lớn khi doanh nghiệp triển khai Lean.",
+                    "Đề xuất bộ 5 chiến lược ứng phó thực tiễn, bao gồm đa dạng hóa nhà cung ứng, số hóa ERP và đào tạo chéo nhân sự."
+                ]
+            },
+            {
+                id: "p2",
+                title: "Phân tích Chuỗi cung ứng Vinamilk",
+                sub: "Học phần: Quản trị Chuỗi cung ứng Toàn cầu (Điểm: A+)",
+                tag: "Tối ưu hóa quy trình / Logistics",
+                thumb: "vinamilk.png",
+                video: "files/Tuan-de-xuat-giai-phap.mp4",
+                short: "Đánh giá chuỗi giá trị và mô hình kho vận Inbound/Outbound khép kín của Vinamilk, đồng thời đề xuất giải pháp tháo gỡ điểm nghẽn xuất khẩu.",
+                skills: ["Tối ưu hóa quy trình", "Logistics"],
+                actions: [
+                    "Sử dụng Ma trận hình ảnh cạnh tranh (CPM) để định vị sức mạnh cạnh tranh của Vinamilk.",
+                    "Phân tích rủi ro và tổn thất tại khâu vận tải chặng cuối do tắc nghẽn hạ tầng quanh cảng Cát Lái.",
+                    "Đề xuất mô hình Logistics đường thủy linh hoạt thay thế một phần đường bộ."
+                ],
+                results: [
+                    "Tối ưu hóa chi phí và đảm bảo dòng chảy hàng hóa cho xuất khẩu quốc tế.",
+                    "Phát triển chiến lược định vị sản phẩm sữa chua mới tích hợp xu hướng xanh và bao bì tái chế."
+                ]
+            },
+            {
+                id: "p3",
+                title: "Điều phối Hậu cần Chiến dịch 'Mùa Hè Xanh 2024'",
+                sub: "Hoạt động Cộng đồng | Ban Tài chính - Hậu cần (Fin & Log)",
+                tag: "Logistics",
+                thumb: "mhx.JPG",
+                pdf: "files/31231023529_SocialActivity.pdf",
+                short: "Chịu trách nhiệm hoạch định ngân sách và tổ chức cung ứng vật tư đồng bộ xuyên suốt chiến dịch tình nguyện quy mô lớn.",
+                skills: ["Logistics"],
+                actions: [
+                    "Lập kế hoạch dự toán tài chính và quản trị vòng đời vật dụng chiến dịch.",
+                    "Quản lý dòng dịch chuyển chuỗi cung ứng vật tư nội bộ và điều phối hậu cần tại 5 địa bàn.",
+                    "Điều phối trực tiếp công tác hậu cần và tổ chức sự kiện giáo dục cộng đồng."
+                ],
+                results: [
+                    "Tối ưu hóa hiệu quả sử dụng dòng tiền và phân bổ nguồn lực chính xác.",
+                    "Đảm bảo chuỗi sự kiện cho hơn 100 học sinh địa phương diễn ra thông suốt và an toàn."
+                ]
+            },
+            {
+                id: "p4",
+                title: "Tối ưu Chuỗi cung ứng Nessie (Cuộc thi SCHALLENGE 2025)",
+                sub: "Thành tích: Top 16 (Vòng Tứ kết) - Cuộc thi Chiến lược Xuyên biên giới",
+                tag: "Logistics",
+                thumb: "nessie.png",
+                pdf: "files/CLXBG-XIII_ROUND1_FOURTUNES.pdf",
+                short: "Xây dựng phương án tối ưu hóa mô hình vận hành và chuỗi cung ứng xuyên biên giới cho Nessie dựa trên dữ liệu thị trường quốc tế.",
+                skills: ["Logistics"],
+                actions: [
+                    "Khai thác dữ liệu thị trường và bóc tách mạng lưới logistics toàn cầu của Nessie.",
+                    "Ứng dụng Incoterms để xử lý bài toán tối ưu nguồn lực và chi phí vận tải quốc tế.",
+                    "Hoàn thiện đề xuất cải tiến mô hình vận hành chuỗi cung ứng xuyên biên giới."
+                ],
+                results: [
+                    "Đề xuất chiến lược tối ưu hoá mô hình chuỗi cung ứng quốc tế.",
+                    "Xuất sắc vượt qua các vòng đấu và ghi tên dự án vào Vòng Tứ kết toàn quốc."
+                ]
+            },
+            {
+                id: "p5",
+                title: "Nghiên cứu Mô hình Hành vi Người tiêu dùng Green SM (GSM)",
+                sub: "Giải thưởng: Giải KK cấp Bộ (Bộ GD&ĐT & VIFOTEC) & Giải A cấp Trường",
+                tag: "Phân tích & Trực quan hóa dữ liệu",
+                short: "Nghiên cứu định lượng ứng dụng SEM để giải mã các yếu tố thúc đẩy hành vi tiêu dùng vận tải xanh.",
+                skills: ["Phân tích & Trực quan hóa dữ liệu"],
+                actions: [
+                    "Đảm nhận vai trò Trưởng nhóm xử lý dữ liệu và làm sạch bộ dữ liệu sơ cấp.",
+                    "Ứng dụng mô hình Structural Equation Modeling (SEM) để kiểm định hệ thống giả thuyết nghiên cứu.",
+                    "Trực quan hóa insight về xu hướng lựa chọn dịch vụ di chuyển xanh của người trẻ."
+                ],
+                results: [
+                    "Hiện thực hóa insight giá trị về hành vi tiêu dùng dịch vụ vận tải xanh Gen Z.",
+                    "Đạt Giải A cấp trường, Giải KK cấp Bộ và được mời xuất bản trên Tạp chí Khoa học Đại học Huế."
+                ]
+            },
+            {
+                id: "p6",
+                title: "Chiến dịch Truyền thông 'Công nghệ & Đổi mới Sáng tạo tại UEH'",
+                sub: "Học phần: Marketing trong Kỷ nguyên số (Điểm: A+)",
+                tag: "Phân tích & Trực quan hóa dữ liệu",
+                short: "Hoạch định và triển khai chiến dịch truyền thông tích hợp dựa trên phân tích chân dung khách hàng dữ liệu lớn.",
+                skills: ["Phân tích & Trực quan hóa dữ liệu"],
+                actions: [
+                    "Phân tích dữ liệu thị trường, xây dựng Persona và Customer Journey Map (CJM).",
+                    "Thiết lập kế hoạch tiếp thị đa kênh và đo lường chỉ số tương tác thời gian thực.",
+                    "Tối ưu hóa nội dung liên tục theo phản hồi và hiệu quả KPI."
+                ],
+                results: [
+                    "Chiến dịch đạt Reach 148% và Engagement 137% so với mục tiêu ban đầu.",
+                    "Gia tăng nhận diện chương trình đào tạo công nghệ mới cho nhóm sinh viên Gen Z."
+                ]
+            },
+            {
+                id: "p7",
+                title: "Mô hình Chăn nuôi Ứng phó Biến đổi Khí hậu tại ĐBSCL",
+                sub: "Học phần: Tư duy Thiết kế (Điểm cuối kỳ: 8.8)",
+                tag: "Thiết kế giải pháp",
+                short: "Phát triển mô hình kinh tế tuần hoàn sinh thái chăn nuôi châu chấu thích ứng xâm nhập mặn và thời tiết cực đoan.",
+                skills: ["Thiết kế giải pháp"],
+                actions: [
+                    "Áp dụng 5 bước Design Thinking để thấu cảm, định vị và phát triển prototype thực địa.",
+                    "Sử dụng mô hình SCAMPER để tạo ý tưởng đột phá cho sinh kế nông dân.",
+                    "Thiết kế bản mẫu và đánh giá hiệu quả chi phí đầu vào trong điều kiện biến đổi khí hậu."
+                ],
+                results: [
+                    "Chế tạo thành công prototype tuần hoàn, tối ưu hóa chi phí nguyên vật liệu đầu vào.",
+                    "Mô hình được chọn trưng bày triển lãm tại sảnh danh dự UEH."
+                ]
+            }
+        ];
+
+        const skillLabelMap = {
+            "Tối ưu hóa quy trình": "Tối ưu hóa quy trình",
+            "Phân tích & Trực quan hóa dữ liệu": "Phân tích & Trực quan hóa dữ liệu",
+            "Logistics": "Logistics",
+            "Thiết kế giải pháp": "Thiết kế giải pháp",
+        };
+
+        function renderSkillTags(skills) {
+            return skills.map(skill => skillLabelMap[skill] || skill).join(' / ');
+        }
+
+        // DỮ LIỆU THÀNH TÍCH SỐ HOÁ
+        const achievementData = [
+    {
+        title: "Giải Khuyến khích KH&CN Cấp Bộ",
+        org: "Bộ Giáo dục và Đào tạo & VIFOTEC",
+        date: "01/2026",
+        icon: "fa-solid fa-trophy",
+        image: "files/GiaiKK.jpg",
+        pdf: "files/GiaiKK_KHCN2025.pdf",
+        desc: [
+            "Tìm kiếm các nghiên cứu đi trước và xây dựng hệ thống giả thuyết khoa học.",
+            "Ứng dụng mô hình cấu trúc tuyến tính SEM kiểm định giả thuyết và thảo luận các kết quả về hành vi sử dụng hệ sinh thái xe điện thông minh Green SM tại TP.HCM."
+        ]
+    },
+    {
+        title: "Giải A Nhà nghiên cứu trẻ UEH 2025",
+        org: "Trường Đại học Kinh tế TP. Hồ Chí Minh",
+        date: "2025",
+        icon: "fa-solid fa-medal",
+        desc: [
+            "Vượt qua các vòng phản biện nghiêm ngặt từ Hội đồng Khoa học cấp Trường để đạt thứ hạng cao nhất.",
+            "Chứng minh năng lực tư duy định lượng độc lập và kỹ năng phân tích dữ liệu nghiên cứu sơ cấp xuất sắc."
+        ]
+    },
+    {
+        title: "Vòng Tứ kết Toàn quốc SCHALLENGE 2025",
+        org: "Cuộc thi Chiến lược Xuyên biên giới - Đội FOURTUNES",
+        date: "11/2025",
+        icon: "fa-solid fa-award",
+        desc: [
+            "Giải quyết bài toán chuỗi cung ứng thực tế tầm vĩ mô của tập đoàn Nestlé liên quan đến xu hướng chuyển đổi bao bì bền vững.",
+            "Khai thác lý thuyết chuỗi giá trị Porter và mô hình SCOR để xây dựng giải pháp tối ưu tổng chi phí (Total landed cost)."
+        ]
+    },
+    {
+        title: "Kỷ yếu Hội thảo ICECH 2024",
+        org: "Hội thảo Khoa học Quốc tế",
+        date: "11/2024",
+        icon: "fa-solid fa-square-poll-vertical",
+        desc: [
+            "Xử lý, làm sạch và trực quan hóa dữ liệu phục vụ viết báo cáo khoa học.",
+            "Đề tài nghiên cứu vinh dự nhận lời mời xuất bản chính thức trên Tạp chí Khoa học Đại học Huế."
+        ]
+    },
+    {
+        title: "Ban Tổ chức BELL'S DEBATE 2025",
+        org: "Ban Chủ nhiệm CLB Anh văn BELL - Hội Sinh viên UEH",
+        date: "09/2025",
+        icon: "fa-solid fa-users-gear",
+        desc: [
+            "Đảm nhận vai trò Thành viên Ban Tổ chức (Member of Organization Board) điều phối giải đấu tranh biện lớn.",
+            "Phối hợp quản lý dòng công việc, hậu cần sự kiện chuyên nghiệp và giao tiếp hoàn toàn bằng Tiếng Anh."
+        ]
+    },
+    {
+        title: "Chứng chỉ Quốc tế Microsoft Office Specialist (MOS)",
+        org: "Microsoft Corporation (ID: 9Jw7-sFpP)",
+        date: "10/2023",
+        icon: "fa-solid fa-file-code",
+        image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MjAgMzAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDA3OGQ0Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJkODllZiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0icmliYm9uIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjg1Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjU1Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNDIwIiBoZWlnaHQ9IjMwMCIgcng9IjI4IiByeT0iMjgiIGZpbGw9InVybCgjYmcpIiAvPgogIDxyZWN0IHg9IjI4IiB5PSIyOCIgd2lkdGg9IjM2NCIgaGVpZ2h0PSIxODAiIHJ4PSIyMCIgcnk9IjIwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMTUpIiAvPgogIDxyZWN0IHg9IjI4IiB5PSI4MCIgd2lkdGg9IjM2NCIgaGVpZ2h0PSIxMTAiIHJ4PSIxNiIgcnk9IjE2IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMjIpIiAvPgogIDxwYXRoIGQ9Ik0yNjAgMjIwIEwyNDAgMjgwIEwyMjAgMjIwIFoiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuOSIvPgogIDxwYXRoIGQ9Ik0xODAgMjIwIEwyMDAgMjgwIEwyMjAgMjIwIFoiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuOSIvPgogIDxjaXJjbGUgY3g9IjIxMCIgY3k9IjE2MCIgcj0iNDIiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuOTUiLz4KICA8dGV4dCB4PSIyMTAiIHk9IjE3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjQwIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMDA3OGQ0Ij5NT1M8L3RleHQ+CiAgPHRleHQgeD0iMjEwIiB5PSI3MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjk1Ij5NaWNyb3NvZnQgT2ZmaWNlPC90ZXh0PgogIDx0ZXh0IHg9IjIxMCIgeT0iMTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuNzUiPlNwZWNpYWxpc3Q8L3RleHQ+Cjwvc3ZnPg==",
+        pdf: "MOS.pdf",
+        desc: [
+            "Đạt chứng chỉ quốc tế chứng nhận năng lực sử dụng chuyên nghiệp các công cụ văn phòng Microsoft (Excel, Word, PowerPoint).",
+            "Nền tảng kỹ thuật cốt lõi giúp số hóa, xử lý, làm sạch cấu trúc dữ liệu và tối ưu báo cáo vận hành."
+        ]
+    },
+    {
+        title: "Ban Tài chính - Hậu cần Mùa Hè Xanh 2024",
+        org: "Chiến dịch Tình nguyện UEH",
+        date: "06/2024",
+        icon: "fa-solid fa-hands-holding-child",
+        desc: [
+            "Thiết lập dự toán ngân sách chi tiết và kiểm soát toàn bộ hậu cần tại các địa phương.",
+            "Đảm bảo an toàn tài chính và điều phối phân bổ tài nguyên chính xác 100%."
+        ]
+    }
+];
+
+        // LOGIC CHUYỂN TAB ĐỘC LẬP (SPA ARCHITECTURE)
+        function switchTab(tabId) {
+            // Ẩn/Hiện panel
+            document.querySelectorAll('.section-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+
+            // Cập nhật Menu Active tương ứng
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Tìm nút menu để highlight
+            const indexMap = { 'hero': 0, 'about': 1, 'projects': 2, 'skills': 3, 'achievements': 4, 'contact': 5 };
+            const menuItems = document.querySelectorAll('.nav-item');
+            if(menuItems[indexMap[tabId]]) {
+                menuItems[indexMap[tabId]].classList.add('active');
+            }
+            window.scrollTo(0,0);
+            closeMobileMenu();
+        }
+
+        function toggleMobileMenu() {
+            document.querySelector('.nav-menu').classList.toggle('open');
+        }
+
+        function closeMobileMenu() {
+            document.querySelector('.nav-menu').classList.remove('open');
+        }
+
+        // SINH MÃ THẺ DỰ ÁN TRANG DỰ ÁN TỔNG
+        function renderMainProjects() {
+            const grid = document.getElementById('main-projects-grid');
+            grid.innerHTML = projectData.map(p => `
+                <div class="project-card" onclick="openProjectPopup('${p.id}')">
+                    <div class="project-img-holder">
+                        ${p.thumb ? `<img src="${p.thumb}" alt="${p.title} ảnh bìa">` : '<i class="fa-solid fa-folder-open"></i>'}
+                    </div>
+                    <div class="project-details">
+                        <div>
+                            <span class="project-tag">${renderSkillTags(p.skills)}</span>
+                            <h3>${p.title}</h3>
+                            <p>${p.short}</p>
+                        </div>
+                        <div class="project-card-footer">
+                            <span>Chi tiết đề án</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // SINH MÃ THÀNH TÍCH (VUỐT NGANG)
+        function renderAchievements() {
+            const box = document.getElementById('achievements-scroll-box');
+            box.innerHTML = achievementData.map((a, idx) => `
+                <div class="achievement-item-card" onclick="openAchievementPopup(${idx})">
+                    <div class="achievement-img-wrapper">
+                        ${a.image ? `<img src="${a.image}" alt="${a.title}">` : `<i class="${a.icon}"></i>`}
+                    </div>
+                    <div class="achievement-info">
+                        <div class="date">${a.date}</div>
+                        <h3>${a.title}</h3>
+                        <p>${a.org}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // INTERACTION: LỌC DỰ ÁN THEO KỸ NĂNG
+        function filterProjectsBySkill(skillKey) {
+            const zone = document.getElementById('filter-results-zone');
+            const filteredGrid = document.getElementById('filtered-projects-grid');
+            const heading = document.getElementById('filter-status-heading');
+
+            const matched = projectData.filter(p => p.skills.includes(skillKey));
+            
+            heading.innerText = `Kết quả lọc: Tìm thấy ${matched.length} dự án liên quan đến kỹ năng này`;
+            zone.style.display = 'block';
+
+            if(matched.length === 0) {
+                filteredGrid.innerHTML = `<p style="padding: 20px; color: var(--text-muted);">Chưa có dự án nào được gán nhãn kỹ năng này.</p>`;
+            } else {
+                filteredGrid.innerHTML = matched.map(p => `
+                    <div class="project-card" onclick="openProjectPopup('${p.id}')">
+                        <div class="project-img-holder" style="background: linear-gradient(135deg, var(--accent) 0%, #3b82f6 100%);">
+                            ${p.thumb ? `<img src="${p.thumb}" alt="${p.title} ảnh bìa">` : '<i class="fa-solid fa-circle-nodes"></i>'}
+                        </div>
+                        <div class="project-details">
+                            <div>
+                                <span class="project-tag">${renderSkillTags(p.skills)}</span>
+                                <h3>${p.title}</h3>
+                                <p>${p.short}</p>
+                            </div>
+                            <div class="project-card-footer">
+                                <span>Chi tiết đề án</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            // Tự cuộn nhẹ xuống khu vực kết quả lọc để người dùng nhìn thấy
+            zone.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetSkillFilter() {
+            document.getElementById('filter-results-zone').style.display = 'none';
+        }
+
+        // OPEN POPUP WINDOWS
+        function openProjectPopup(id) {
+            const p = projectData.find(item => item.id === id);
+            if(!p) return;
+            // Nếu dự án có thuộc tính video, nhúng video player.
+            let videoHtml = '';
+            if(p.video) {
+                const videoUrl = encodeURI(p.video);
+                videoHtml = `\
+                    <h4 style="margin-top:18px;"><i class="fa-solid fa-film"></i> Video đề xuất</h4>\
+                    <video controls preload="metadata" playsinline poster="vinamilk.png" class="modal-pdf">\
+                        <source src="${videoUrl}" type="video/mp4">\
+                        Trình duyệt của bạn không hỗ trợ phát video này.\
+                    </video>\
+                    <p style="margin-top:8px;"><a href="${videoUrl}" target="_blank" style="font-weight:700; color:var(--accent);">Mở video trong tab mới</a></p>\
+                `;
+            }
+            // Nếu dự án có thuộc tính PDF, nhúng iframe và thêm link mở trong tab mới
+            let pdfHtml = '';
+            if(p.pdf) {
+                const pdfUrl = encodeURI(p.pdf);
+                pdfHtml = `\
+                    <h4 style="margin-top:18px;"><i class="fa-solid fa-file-pdf"></i> Báo cáo (PDF)</h4>\
+                    <iframe src="${pdfUrl}" class="modal-pdf"></iframe>\
+                    <p style="margin-top:8px;"><a href="${pdfUrl}" target="_blank" style="font-weight:700; color:var(--accent);">Mở file trong tab mới</a></p>\
+                `;
+            }
+
+            const content = `
+                <h3>${p.title}</h3>
+                <div class="modal-meta">${p.sub}</div>
+                <h4><i class="fa-solid fa-crosshairs"></i> Đóng góp & Hành động cốt lõi:</h4>
+                <ul>
+                    ${p.actions.map(act => `<li>${act}</li>`).join('')}
+                </ul>
+                <h4 style="margin-top:20px;"><i class="fa-solid fa-check-double"></i> Kết quả nổi bật:</h4>
+                <ul>
+                    ${p.results ? p.results.map(line => `<li>${line}</li>`).join('') : ''}
+                </ul>
+                ${videoHtml}
+                ${pdfHtml}
+            `;
+
+            document.getElementById('modal-inside-content').innerHTML = content;
+            document.getElementById('detail-modal').classList.add('open');
+        }
+
+        function openAchievementPopup(index) {
+            const a = achievementData[index];
+            if(!a) return;
+
+            let pdfHtml = '';
+            if(a.pdf) {
+                const pdfUrl = encodeURI(a.pdf);
+                pdfHtml = `
+                    <h4 style="margin-top:18px;"><i class="fa-solid fa-file-pdf"></i> Chứng chỉ / Tài liệu</h4>
+                    <object data="${pdfUrl}" type="application/pdf" width="100%" height="420">
+                        <p style="padding: 20px 0; color: var(--text-muted);">Trình duyệt của bạn không hỗ trợ hiển thị PDF trực tiếp. <a href="${pdfUrl}" target="_blank" rel="noopener" style="font-weight:700; color:var(--accent);">Mở file trong tab mới</a> hoặc tải về để xem.</p>
+                    </object>
+                    <p style="margin-top:8px;"><a href="${pdfUrl}" target="_blank" rel="noopener" style="font-weight:700; color:var(--accent);">Mở file chứng chỉ / tài liệu trong tab mới</a></p>
+                `;
+            }
+
+            const content = `
+                <h3>${a.title}</h3>
+                <div class="modal-meta">${a.org} (${a.date})</div>
+                <h4><i class="fa-solid fa-square-check"></i> Kết quả & Mô tả thực tế:</h4>
+                <ul>
+                    ${a.desc.map(line => `<li>${line}</li>`).join('')}
+                </ul>
+                ${pdfHtml}
+            `;
+            document.getElementById('modal-inside-content').innerHTML = content;
+            document.getElementById('detail-modal').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('detail-modal').classList.remove('open');
+        }
+
+        // KHỞI CHẠY KHỬ ĐỘNG ỨNG DỤNG
+        window.onload = function() {
+            renderMainProjects();
+            renderAchievements();
+        }
+    </script>
+</body>
+</html>

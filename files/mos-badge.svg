@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#2d89ef"/>
+    </linearGradient>
+    <linearGradient id="ribbon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+  <rect width="420" height="300" rx="28" ry="28" fill="url(#bg)" />
+  <rect x="28" y="28" width="364" height="180" rx="20" ry="20" fill="rgba(255,255,255,0.15)" />
+  <rect x="28" y="80" width="364" height="110" rx="16" ry="16" fill="rgba(255,255,255,0.22)" />
+  <path d="M260 220 L240 280 L220 220 Z" fill="#ffffff" opacity="0.9"/>
+  <path d="M180 220 L200 280 L220 220 Z" fill="#ffffff" opacity="0.9"/>
+  <circle cx="210" cy="160" r="42" fill="#ffffff" opacity="0.95"/>
+  <text x="210" y="170" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="40" font-weight="700" fill="#0078d4">MOS</text>
+  <text x="210" y="72" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="24" fill="#ffffff" opacity="0.95">Microsoft Office</text>
+  <text x="210" y="100" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#ffffff" opacity="0.75">Specialist</text>
+</svg>
