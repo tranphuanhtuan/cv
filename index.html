@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trần Phú Anh Tuấn | Supply Chain Portfolio</title>
+    <title>Tuan Tran | Human Resource Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -29,11 +29,41 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
         }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             background-color: var(--bg-site);
             color: var(--text-dark);
             overflow-x: hidden;
             line-height: 1.6;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .parallax-layer {
+            will-change: transform;
+            transition: transform 0.2s linear;
+        }
+        @keyframes textShimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        .hero-left h1,
+        .page-title {
+            background-image: linear-gradient(90deg, var(--primary), var(--accent), #60a5fa, var(--primary));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textShimmer 6s linear infinite;
         }
 
         /* --- LAYOUT ĐỘC LẬP (SPA ARCHITECTURE) --- */
@@ -62,6 +92,14 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
         /* --- HEADER & NAVIGATION --- */
@@ -172,22 +210,30 @@
             line-height: 1.1;
             letter-spacing: -0.04em;
             margin-bottom: 8px;
+            animation: fadeUp 0.8s ease-out both;
+            animation-delay: 0.1s;
         }
         .hero-left .job-title {
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--accent);
             margin-bottom: 24px;
+            animation: fadeUp 0.8s ease-out both;
+            animation-delay: 0.25s;
         }
         .hero-left p {
             font-size: 1.1rem;
             color: var(--text-muted);
             max-width: 560px;
             margin-bottom: 40px;
+            animation: fadeUp 0.8s ease-out both;
+            animation-delay: 0.4s;
         }
         .social-links {
             display: flex;
             gap: 16px;
+            animation: fadeUp 0.8s ease-out both;
+            animation-delay: 0.55s;
         }
         .social-btn {
             width: 48px;
@@ -235,6 +281,13 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            animation: floatImage 5s ease-in-out infinite;
+            will-change: transform;
+            transition: transform 0.35s ease, filter 0.35s ease;
+        }
+        .hero-no-frame-img img.hero-avatar:hover {
+            transform: scale(1.02);
+            filter: brightness(1.03);
         }
 
         /* ==========================================
@@ -251,6 +304,10 @@
             margin-bottom: 20px;
             color: var(--text-dark);
             text-align: justify;
+        }
+        .about-right-placeholder img {
+            animation: fadeUp 0.9s ease-out both;
+            animation-delay: 0.2s;
         }
         .about-highlights {
             display: grid;
@@ -275,9 +332,6 @@
             color: var(--text-muted);
             margin-bottom: 0;
             margin-top: 4px;
-        }
-        .about-right {
-            /* container to enforce square crop */
         }
         .about-right-placeholder {
             width: 100%;
@@ -320,7 +374,7 @@
             flex-direction: column;
         }
         .project-card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-8px) scale(1.01);
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.06);
         }
         .project-img-holder {
@@ -476,7 +530,7 @@
             transition: var(--transition);
         }
         .achievement-item-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-8px) scale(1.01);
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.06);
         }
         .achievement-img-wrapper {
@@ -705,17 +759,17 @@
     <div class="app-container">
         <header>
             <div class="navbar">
-                <div class="logo">ANHTUAN<span>.SC</span></div>
-                <button class="nav-toggle" aria-label="Mở menu điều hướng" onclick="toggleMobileMenu()">
+                <div class="logo">ANHTUAN<span>.HR</span></div>
+                <button class="nav-toggle" aria-label="Open navigation menu" onclick="toggleMobileMenu()">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <ul class="nav-menu">
-                    <li class="nav-item active" onclick="switchTab('hero')">Trang chủ</li>
-                    <li class="nav-item" onclick="switchTab('about')">Về tôi</li>
-                    <li class="nav-item" onclick="switchTab('projects')">Dự án</li>
-                    <li class="nav-item" onclick="switchTab('skills')">Kỹ năng</li>
-                    <li class="nav-item" onclick="switchTab('achievements')">Thành tích</li>
-                    <li class="nav-item" onclick="switchTab('contact')">Liên hệ</li>
+                    <li class="nav-item active" onclick="switchTab('hero')">Home</li>
+                    <li class="nav-item" onclick="switchTab('about')">About</li>
+                    <li class="nav-item" onclick="switchTab('projects')">Projects</li>
+                    <li class="nav-item" onclick="switchTab('skills')">Skills</li>
+                    <li class="nav-item" onclick="switchTab('achievements')">Achievements</li>
+                    <li class="nav-item" onclick="switchTab('contact')">Contact</li>
                 </ul>
             </div>
         </header>
@@ -724,17 +778,17 @@
 
             <div id="hero" class="section-panel active">
                 <div class="hero-layout">
-                    <div class="hero-left">
-                        <h1>Hi, I'm Tuấn</h1>
-                        <div class="job-title">Supply Chain Intern</div>
-                        <p>Mình kết hợp tư duy định lượng và phân tích dữ liệu để tối ưu hóa vận hành chuỗi cung ứng.</p>
+                    <div class="hero-left reveal">
+                        <h1>Hi, I'm Tuan</h1>
+                        <div class="job-title">Human Resource Intern</div>
+                        <p>Bridging data-driven insights and business operations to optimize human capital and empower organizational growth.</p>
                         <div class="social-links">
-                            <a href="https://linkedin.com" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
-                            <a href="https://github.com" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i></a>
-                            <a href="https://facebook.com" target="_blank" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://www.linkedin.com/in/trantuan05/" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="https://github.com/tuantran31231023529-UEH" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://www.facebook.com/tuantran.mid.autumn/" target="_blank" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
                         </div>
                     </div>
-                    <div class="hero-right">
+                    <div class="hero-right parallax-layer">
                         <div class="hero-no-frame-img">
                             <img src="Trang chu/Ngoi-doi-dien.png" alt="Avatar Trần Phú Anh Tuấn" class="hero-avatar">
                         </div>
@@ -744,14 +798,18 @@
 
             <div id="about" class="section-panel">
                 <div class="about-layout">
-                    <div class="about-left">
-                        <h2 class="page-title">Giới thiệu bản thân</h2>
-                        <p>Background: Sinh viên năm cuối ngành Kinh doanh quốc tế - UEH. Sở hữu nền tảng vững chắc về phân tích số liệu và mô hình thống kê.</p>
-                        <p>Tư duy làm việc: Luôn tiếp cận vấn đề bằng phương pháp dựa trên dữ liệu (Data-driven decisions). Có khả năng làm việc nhóm tốt và tư duy quản lý chi phí, tối ưu nguồn lực tích lũy qua các dự án thực tế.</p>
-                        <p>Mục tiêu nghề nghiệp: Thành thạo quy trình vận hành thực tế trong ngắn hạn và hướng tới trở thành một Chuyên viên Phân tích chuỗi cung ứng chuyên nghiệp trong dài hạn.</p>
+                    <div class="about-left reveal">
+                        <h2 class="page-title">About Me</h2>
+                        <p><strong>Background:</strong> Final-year International Business student at UEH. I possess a solid foundation in quantitative research, statistical modeling, and organizational behavior frameworks.</p>
+                        <p><strong>My Philosophy:</strong> I believe that HR is the backbone of business operations. I strive to approach people management, employee engagement, and talent acquisition through a data-driven lens (Data-driven HR) to optimize resources and human capital efficiency.</p>
+                        <p><strong>Career Objectives:</strong></p>
+                        <ul style="margin: 12px 0 0 20px; color: var(--text-dark);">
+                            <li><strong>Short-term:</strong> Master practical HR operations and actively partner with business units as a Learning &amp; Development Intern.</li>
+                            <li><strong>Long-term:</strong> Advance into a professional HRBP Manager role, partnering with business leaders to build robust, people-centric organizations.</li>
+                        </ul>
                     </div>
-                    <div class="about-right">
-                        <div class="about-right-placeholder">
+                    <div class="about-right reveal">
+                        <div class="about-right-placeholder parallax-layer">
                             <img src="Ve toi/ngoi-lam-viec.png" alt="Ngồi làm việc - Trần Phú Anh Tuấn">
                         </div>
                     </div>
@@ -759,41 +817,41 @@
             </div>
 
             <div id="projects" class="section-panel">
-                <h2 class="page-title">Dự án học tập & Nghiên cứu</h2>
-                <div class="projects-grid" id="main-projects-grid">
+                <h2 class="page-title reveal">Learning Projects & Research</h2>
+                <div class="projects-grid reveal" id="main-projects-grid">
                     </div>
             </div>
 
             <div id="skills" class="section-panel">
-                <h2 class="page-title">Năng lực chính</h2>
-                <p style="color: var(--text-muted); margin-bottom: 24px;"><i class="fa-solid fa-lightbulb"></i> Chọn một năng lực để xem các dự án tôi đã trực tiếp thực hiện liên quan.</p>
+                <h2 class="page-title reveal">Core Strengths</h2>
+                <p class="reveal" style="color: var(--text-muted); margin-bottom: 24px;"><i class="fa-solid fa-lightbulb"></i> Select a capability to view the projects I have directly contributed to.</p>
 
                 <div class="skills-container">
-                    <div class="skill-group-box">
-                        <h3><i class="fa-solid fa-chart-line"></i> Phân tích & Trực quan hóa dữ liệu</h3>
+                    <div class="skill-group-box reveal">
+                        <h3><i class="fa-solid fa-chart-line"></i> Data Analysis & Visualization</h3>
                         <div class="skill-tags-flex">
-                            <div class="skill-clickable-tag" onclick="filterProjectsBySkill('Phân tích & Trực quan hóa dữ liệu')"><i class="fa-solid fa-chart-pie"></i> Xem dự án liên quan</div>
+                            <div class="skill-clickable-tag" onclick="filterProjectsBySkill('Data Analysis & Visualization')"><i class="fa-solid fa-chart-pie"></i> View related projects</div>
                         </div>
                     </div>
 
-                    <div class="skill-group-box">
-                        <h3><i class="fa-solid fa-cogs"></i> Tối ưu hóa quy trình</h3>
+                    <div class="skill-group-box reveal">
+                        <h3><i class="fa-solid fa-cogs"></i> Process Optimization</h3>
                         <div class="skill-tags-flex">
-                            <div class="skill-clickable-tag" onclick="filterProjectsBySkill('Tối ưu hóa quy trình')"><i class="fa-solid fa-gears"></i> Xem dự án liên quan</div>
+                            <div class="skill-clickable-tag" onclick="filterProjectsBySkill('Process Optimization')"><i class="fa-solid fa-gears"></i> View related projects</div>
                         </div>
                     </div>
 
-                    <div class="skill-group-box">
+                    <div class="skill-group-box reveal">
                         <h3><i class="fa-solid fa-truck-loading"></i> Logistics</h3>
                         <div class="skill-tags-flex">
-                            <div class="skill-clickable-tag" onclick="filterProjectsBySkill('Logistics')"><i class="fa-solid fa-truck-fast"></i> Xem dự án liên quan</div>
+                            <div class="skill-clickable-tag" onclick="filterProjectsBySkill('Logistics')"><i class="fa-solid fa-truck-fast"></i> View related projects</div>
                         </div>
                     </div>
 
-                    <div class="skill-group-box">
-                        <h3><i class="fa-solid fa-lightbulb"></i> Thiết kế giải pháp</h3>
+                    <div class="skill-group-box reveal">
+                        <h3><i class="fa-solid fa-lightbulb"></i> Solution Design</h3>
                         <div class="skill-tags-flex">
-                            <div class="skill-clickable-tag" onclick="filterProjectsBySkill('Thiết kế giải pháp')"><i class="fa-solid fa-pen-nib"></i> Xem dự án liên quan</div>
+                            <div class="skill-clickable-tag" onclick="filterProjectsBySkill('Solution Design')"><i class="fa-solid fa-pen-nib"></i> View related projects</div>
                         </div>
                     </div>
                 </div>
@@ -801,32 +859,32 @@
                 <div class="filtered-results-area" id="filter-results-zone">
                     <div class="filtered-title-wrapper">
                         <h3 id="filter-status-heading" style="font-size: 1.25rem; color: var(--primary);"></h3>
-                        <button class="clear-filter-btn" onclick="resetSkillFilter()">Xem tất cả dự án</button>
+                        <button class="clear-filter-btn" onclick="resetSkillFilter()">View all projects</button>
                     </div>
                     <div class="projects-grid" id="filtered-projects-grid"></div>
                 </div>
             </div>
             <div id="achievements" class="section-panel">
-                <h2 class="page-title">Giải thưởng & Hoạt động</h2>
+                <h2 class="page-title reveal">Awards & Activities</h2>
                 
-                <div class="horizontal-scroll-container" id="achievements-scroll-box">
+                <div class="horizontal-scroll-container reveal" id="achievements-scroll-box">
                     </div>
             </div>
 
             <div id="contact" class="section-panel">
-                <div class="contact-layout">
-                    <h2 style="font-size: 2rem; font-weight: 800; color: var(--primary);">Kết nối hợp tác</h2>
-                    <p class="contact-p" style="color: var(--text-muted); margin-top: 8px;">Tôi hiện đang tìm kiếm cơ hội thực tập, cọ xát trong mảng Chuỗi cung ứng.</p>
+                <div class="contact-layout reveal">
+                    <h2 style="font-size: 2rem; font-weight: 800; color: var(--primary);">Let’s Connect</h2>
+                    <p class="contact-p" style="color: var(--text-muted); margin-top: 8px;">I am currently exploring internship and hands-on opportunities in Human Resources.</p>
                     
                     <div class="contact-grid">
-                        <div class="contact-pill-item"><i class="fa-solid fa-envelope"></i> phuanhtuantran@gmail.com</div>
+                        <div class="contact-pill-item"><i class="fa-solid fa-envelope"></i> tpatuan05@gmail.com</div>
                         <div class="contact-pill-item"><i class="fa-solid fa-phone"></i> 0328028129</div>
-                        <div class="contact-pill-item"><i class="fa-solid fa-location-dot"></i> Phường Chánh Hưng, TP.HCM</div>
+                        <div class="contact-pill-item"><i class="fa-solid fa-location-dot"></i> Ward 8, Ho Chi Minh City</div>
                     </div>
                     
-                    <a href="mailto:phuanhtuantran@gmail.com" class="social-btn" style="width: auto; border-radius: 8px; padding: 0 24px; margin: 0 auto; background-color: var(--primary); color: white;">Gửi Email liên hệ trực tiếp</a>
+                    <a href="mailto:tpatuan05@gmail.com" class="social-btn" style="width: auto; border-radius: 8px; padding: 0 24px; margin: 0 auto; background-color: var(--primary); color: white;">Send an Email</a>
                     
-                    <p class="footer-txt">© 2026 Trần Phú Anh Tuấn. Portfolio</p>
+                    <p class="footer-txt">© 2026 Tuan Tran. Portfolio</p>
                 </div>
             </div>
 
@@ -846,243 +904,241 @@
         const projectData = [
             {
                 id: "p1",
-                title: "Hệ thống Sản xuất Tinh gọn Toyota (TPS)",
-                sub: "Học phần: Quản trị Vận hành Toàn cầu (Điểm: A)",
-                // Đường dẫn tới file PDF báo cáo (nếu có) — đặt file trong thư mục dự án Toyota
+                title: "Toyota Lean Production System (TPS)",
+                sub: "Course: Global Operations Management (Grade: A)",
                 pdf: "Du an/Toyota/TOYOTAS_LEAN_MANUFACTURING_REPORT.pdf",
-                // Ảnh bìa riêng cho dự án TPS
                 thumb: "Du an/Toyota/Toyota - bia.png",
                 bgImage: "Du an/Toyota/Toyota - bia.png",
-                tag: "Tối ưu hóa quy trình",
-                short: "Nghiên cứu mô hình vận hành tinh gọn Toyota, bóc tách các công cụ triệt tiêu lãng phí và đề xuất chiến lược chuyển đổi Lean thực tiễn.",
-                skills: ["Tối ưu hóa quy trình"],
+                tag: "Process Optimization",
+                short: "Explored how Toyota’s operating model turns disciplined routines into measurable efficiency, highlighting where lean thinking creates long-term value.",
+                skills: ["Process Optimization"],
                 actions: [
-                    "Phân tích cấu trúc 3 trụ cột cốt lõi TPS gồm JIT, Heijunka và hệ thống thẻ Kanban.",
-                    "Ứng dụng Sơ đồ dòng giá trị (VSM) để định vị 7 loại lãng phí (Muda).",
-                    "Đánh giá giải pháp chuyển đổi khuôn mẫu nhanh bằng kỹ thuật SMED."
+                    "Examined the three pillars of TPS: JIT, Heijunka, and the Kanban system.",
+                    "Used Value Stream Mapping (VSM) to identify waste and uncover bottlenecks across the flow.",
+                    "Evaluated rapid changeover strategies through SMED to improve responsiveness."
                 ],
                 results: [
-                    "Nhận diện 5 gánh nặng/thách thức lớn khi doanh nghiệp triển khai Lean.",
-                    "Đề xuất bộ 5 chiến lược ứng phó thực tiễn, bao gồm đa dạng hóa nhà cung ứng, số hóa ERP và đào tạo chéo nhân sự."
+                    "Reframed lean implementation as a practical capability-building process rather than a purely technical change.",
+                    "Produced a structured set of recommendations for improving flow, coordination, and operational resilience."
                 ]
             },
             {
                 id: "p2",
-                title: "Phân tích Chuỗi cung ứng Vinamilk",
-                sub: "Học phần: Quản trị Chuỗi cung ứng Toàn cầu (Điểm: A+)",
-                tag: "Tối ưu hóa quy trình / Logistics",
+                title: "Vinamilk Supply Chain Analysis",
+                sub: "Course: Global Supply Chain Management (Grade: A+)",
+                tag: "Process Optimization / Logistics",
                 thumb: "Du an/Vinamilk/vinamilk.png",
                 bgImage: "Du an/Vinamilk/vinamilk.png",
                 video: "Du an/Vinamilk/Tuan-de-xuat-giai-phap.mp4",
-                short: "Đánh giá chuỗi giá trị và mô hình kho vận Inbound/Outbound khép kín của Vinamilk, đồng thời đề xuất giải pháp tháo gỡ điểm nghẽn xuất khẩu.",
-                skills: ["Tối ưu hóa quy trình", "Logistics"],
+                short: "Assessed Vinamilk’s end-to-end logistics model and proposed ways to strengthen export flow and reduce operational friction.",
+                skills: ["Process Optimization", "Logistics"],
                 actions: [
-                    "Sử dụng Ma trận hình ảnh cạnh tranh (CPM) để định vị sức mạnh cạnh tranh của Vinamilk.",
-                    "Phân tích rủi ro và tổn thất tại khâu vận tải chặng cuối do tắc nghẽn hạ tầng quanh cảng Cát Lái.",
-                    "Đề xuất mô hình Logistics đường thủy linh hoạt thay thế một phần đường bộ."
+                    "Mapped Vinamilk’s competitive position using a strategic business lens tailored to its market context.",
+                    "Evaluated last-mile transport risks around major port and inland distribution constraints.",
+                    "Proposed a more flexible logistics model to support smoother cross-border movement."
                 ],
                 results: [
-                    "Tối ưu hóa chi phí và đảm bảo dòng chảy hàng hóa cho xuất khẩu quốc tế.",
-                    "Phát triển chiến lược định vị sản phẩm sữa chua mới tích hợp xu hướng xanh và bao bì tái chế."
+                    "Highlighted practical opportunities to reduce cost pressure while strengthening export continuity.",
+                    "Shaped a more resilient positioning strategy for new product expansion with sustainability in mind."
                 ]
             },
             {
                 id: "p3",
-                title: "Điều phối Hậu cần Chiến dịch 'Mùa Hè Xanh 2024'",
-                sub: "Hoạt động Cộng đồng | Ban Tài chính - Hậu cần (Fin & Log)",
+                title: "Community Logistics Coordination for the Green Summer 2024 Campaign",
+                sub: "Community initiative | Finance & Logistics Team",
                 tag: "Logistics",
                 thumb: "Du an/Mua he xanh/mhx.JPG",
                 bgImage: "Du an/Mua he xanh/mhx.JPG",
                 pdf: "Du an/Mua he xanh/MHX.pdf",
-                short: "Chịu trách nhiệm hoạch định ngân sách và tổ chức cung ứng vật tư đồng bộ xuyên suốt chiến dịch tình nguyện quy mô lớn.",
+                short: "Managed the movement of materials, budgets, and supporting functions across a large-scale volunteer campaign.",
                 skills: ["Logistics"],
                 actions: [
-                    "Lập kế hoạch dự toán tài chính và quản trị vòng đời vật dụng chiến dịch.",
-                    "Quản lý dòng dịch chuyển chuỗi cung ứng vật tư nội bộ và điều phối hậu cần tại 5 địa bàn.",
-                    "Điều phối trực tiếp công tác hậu cần và tổ chức sự kiện giáo dục cộng đồng."
+                    "Built a financial plan and tracked the full lifecycle of campaign resources.",
+                    "Coordinated internal supply flow and operational support across five activity areas.",
+                    "Oversaw logistics execution and helped keep community events running smoothly."
                 ],
                 results: [
-                    "Tối ưu hóa hiệu quả sử dụng dòng tiền và phân bổ nguồn lực chính xác.",
-                    "Đảm bảo chuỗi sự kiện cho hơn 100 học sinh địa phương diễn ra thông suốt và an toàn."
+                    "Improved resource allocation and financial control across the campaign timeline.",
+                    "Supported a safe and well-organized series of events for more than 100 local students."
                 ]
             },
             {
                 id: "p4",
-                title: "Tối ưu Chuỗi cung ứng Nessie (Cuộc thi SCHALLENGE 2025)",
-                sub: "Thành tích: Top 16 (Vòng Tứ kết) - Cuộc thi Chiến lược Xuyên biên giới",
+                title: "Nessie Supply Chain Optimization Challenge",
+                sub: "Achievement: Top 16 (Quarterfinals) – Cross-Border Strategy Competition",
                 tag: "Logistics",
                 thumb: "Du an/Nessie/nessie.png",
                 bgImage: "Du an/Nessie/nessie.png",
                 pdf: "Du an/Nessie/nessie.pdf",
-                short: "Xây dựng phương án tối ưu hóa mô hình vận hành và chuỗi cung ứng xuyên biên giới cho Nessie dựa trên dữ liệu thị trường quốc tế.",
+                short: "Built a strategic proposal for improving Nessie’s cross-border operations through scenario-based logistics design.",
                 skills: ["Logistics"],
                 actions: [
-                    "Khai thác dữ liệu thị trường và bóc tách mạng lưới logistics toàn cầu của Nessie.",
-                    "Ứng dụng Incoterms để xử lý bài toán tối ưu nguồn lực và chi phí vận tải quốc tế.",
-                    "Hoàn thiện đề xuất cải tiến mô hình vận hành chuỗi cung ứng xuyên biên giới."
+                    "Analyzed market data and mapped Nessie’s global logistics footprint.",
+                    "Applied Incoterms to address international cost and resource allocation questions.",
+                    "Refined a proposal for improving cross-border supply chain performance."
                 ],
                 results: [
-                    "Đề xuất chiến lược tối ưu hoá mô hình chuỗi cung ứng quốc tế.",
-                    "Xuất sắc vượt qua các vòng đấu và ghi tên dự án vào Vòng Tứ kết toàn quốc."
+                    "Presented a more optimized international supply chain model.",
+                    "Advanced through the competition rounds and earned a place in the national quarterfinal stage."
                 ]
             },
             {
                 id: "p5",
-                title: "Nghiên cứu Mô hình Hành vi Người tiêu dùng Green SM (GSM)",
-                sub: "Giải thưởng: Giải KK cấp Bộ (Bộ GD&ĐT & VIFOTEC) & Giải A cấp Trường",
-                tag: "Phân tích & Trực quan hóa dữ liệu",
-                short: "Nghiên cứu định lượng ứng dụng SEM để giải mã các yếu tố thúc đẩy hành vi tiêu dùng vận tải xanh.",
+                title: "Green SM Consumer Behavior Research",
+                sub: "Award: Ministry-level Encouragement Prize and School-Level Excellence Award",
+                tag: "Data Analysis & Visualization",
+                short: "Applied quantitative research methods to examine what drives environmentally conscious mobility choices among younger consumers.",
                 thumb: "Du an/Green SM/giaibo.png",
                 bgImage: "Du an/Green SM/giaibo.png",
-                skills: ["Phân tích & Trực quan hóa dữ liệu"],
+                skills: ["Data Analysis & Visualization"],
                 actions: [
-                    "Đảm nhận vai trò Trưởng nhóm xử lý dữ liệu và làm sạch bộ dữ liệu sơ cấp.",
-                    "Ứng dụng mô hình Structural Equation Modeling (SEM) để kiểm định hệ thống giả thuyết nghiên cứu.",
-                    "Trực quan hóa insight về xu hướng lựa chọn dịch vụ di chuyển xanh của người trẻ."
+                    "Led the data processing and cleaning of the primary dataset.",
+                    "Used Structural Equation Modeling (SEM) to test the research hypotheses.",
+                    "Visualized insight patterns around Gen Z preferences for greener transportation."
                 ],
                 results: [
-                    "Hiện thực hóa insight giá trị về hành vi tiêu dùng dịch vụ vận tải xanh Gen Z.",
-                    "Đạt Giải A cấp trường, Giải KK cấp Bộ và được mời xuất bản trên Tạp chí Khoa học Đại học Huế."
+                    "Turned research evidence into practical insight about green mobility behavior.",
+                    "Earned the school-level award and the ministry-level encouragement prize, with publication consideration from a university journal."
                 ]
             },
             {
                 id: "p6",
-                title: "Chiến dịch Truyền thông 'Công nghệ & Đổi mới Sáng tạo tại UEH'",
-                sub: "Học phần: Marketing trong Kỷ nguyên số (Điểm: A+)",
-                tag: "Phân tích & Trực quan hóa dữ liệu",
-                short: "Hoạch định và triển khai chiến dịch truyền thông tích hợp dựa trên phân tích chân dung khách hàng dữ liệu lớn.",
+                title: "Technology & Innovation Communication Campaign at UEH",
+                sub: "Course: Marketing in the Digital Era (Grade: A+)",
+                tag: "Data Analysis & Visualization",
+                short: "Designed a data-informed campaign that connected audience insight with story-driven communication and outreach.",
                 thumb: "Du an/InnoTech/innotech.png",
                 bgImage: "Du an/InnoTech/innotech.png",
-                skills: ["Phân tích & Trực quan hóa dữ liệu"],
+                skills: ["Data Analysis & Visualization"],
                 actions: [
-                    "Phân tích dữ liệu thị trường, xây dựng Persona và Customer Journey Map (CJM).",
-                    "Thiết lập kế hoạch tiếp thị đa kênh và đo lường chỉ số tương tác thời gian thực.",
-                    "Tối ưu hóa nội dung liên tục theo phản hồi và hiệu quả KPI."
+                    "Analyzed market data, built personas, and mapped the customer journey.",
+                    "Created a multi-channel marketing plan and tracked engagement indicators in real time.",
+                    "Refined message content continuously based on feedback and KPI performance."
                 ],
                 results: [
-                    "Chiến dịch đạt Reach 148% và Engagement 137% so với mục tiêu ban đầu.",
-                    "Gia tăng nhận diện chương trình đào tạo công nghệ mới cho nhóm sinh viên Gen Z."
+                    "Achieved 148% of the initial reach target and 137% of the engagement goal.",
+                    "Strengthened recognition for new technology training opportunities among Gen Z students."
                 ]
             },
             {
                 id: "p8",
-                title: "Phân tích Dữ liệu Kinh doanh Bất động sản (L5T)",
-                sub: "Học phần: Phân tích Dữ liệu Kinh doanh | Điểm: A",
-                tag: "Phân tích & Trực quan hóa dữ liệu",
+                title: "Real Estate Business Data Analysis (L5T)",
+                sub: "Course: Business Data Analysis | Grade: A",
+                tag: "Data Analysis & Visualization",
                 thumb: "Du an/L5T/BA.png",
                 bgImage: "Du an/L5T/BA.png",
                 pdf: "Du an/L5T/BA.pdf",
-                short: "Xây dựng Dashboard trực quan hóa dữ liệu doanh thu và thị phần kinh doanh bằng công cụ Looker Studio.",
-                skills: ["Phân tích & Trực quan hóa dữ liệu"],
+                short: "Built a reporting dashboard that turned sales and market data into clear business insights for regional performance tracking.",
+                skills: ["Data Analysis & Visualization"],
                 actions: [
-                    "Sử dụng nền tảng Looker Studio để xử lý và trực quan hóa bộ dữ liệu bán hàng của công ty bất động sản L5T đối với các phân khúc nhà ở (single-family, townhouse).",
-                    "Thiết kế Dashboard báo cáo theo dõi chi tiết hiệu suất phân bổ tại các thị trường trọng điểm (South, Midwest)."
+                    "Used Looker Studio to process and visualize property sales data across key residential segments.",
+                    "Designed a reporting dashboard to track performance across priority markets and customer clusters."
                 ],
                 results: [
-                    "Bóc tách thành công các insight kinh doanh quan trọng, làm rõ sự chênh lệch thị phần giữa các khu vực và trực quan hóa các chỉ số tài chính cốt lõi (bán ra 168 căn nhà, mang về doanh thu 44,9 triệu USD trong 1 quý).",
-                    "Đạt điểm A cuối kì."
+                    "Uncovered important business insights around regional share differences and core financial indicators.",
+                    "Completed the course with a strong final grade."
                 ]
             },
             {
                 id: "p7",
-                title: "Mô hình Chăn nuôi Ứng phó Biến đổi Khí hậu tại ĐBSCL",
-                sub: "Học phần: Tư duy Thiết kế (Điểm cuối kỳ: 8.8)",
-                tag: "Thiết kế giải pháp",
-                short: "Phát triển mô hình kinh tế tuần hoàn sinh thái chăn nuôi châu chấu thích ứng xâm nhập mặn và thời tiết cực đoan.",
+                title: "Climate-Responsive Livestock Model for the Mekong Delta",
+                sub: "Course: Design Thinking (Final grade: 8.8)",
+                tag: "Solution Design",
+                short: "Proposed a circular livestock model designed to help farmers adapt to salinity intrusion and climate volatility.",
                 thumb: "Du an/TDTK/TDTK.png",
                 bgImage: "Du an/TDTK/TDTK.png",
                 doc: "Du an/TDTK/TDTK.docx",
-                skills: ["Thiết kế giải pháp"],
+                skills: ["Solution Design"],
                 actions: [
-                    "Áp dụng 5 bước Design Thinking để thấu cảm, định vị và phát triển prototype thực địa.",
-                    "Sử dụng mô hình SCAMPER để tạo ý tưởng đột phá cho sinh kế nông dân.",
-                    "Thiết kế bản mẫu và đánh giá hiệu quả chi phí đầu vào trong điều kiện biến đổi khí hậu."
+                    "Applied a five-step design thinking process to understand local needs and define the problem space.",
+                    "Used SCAMPER to generate creative ideas for improving farmers’ livelihoods.",
+                    "Built a prototype and assessed the cost-effectiveness of the proposed solution."
                 ],
                 results: [
-                    "Chế tạo thành công prototype tuần hoàn, tối ưu hóa chi phí nguyên vật liệu đầu vào.",
-                    "Mô hình được chọn trưng bày triển lãm tại sảnh danh dự UEH."
+                    "Created a workable circular prototype that reduced material input costs.",
+                    "Selected for exhibition in the honorary hall at UEH."
                 ]
             }
         ];
 
         const skillLabelMap = {
-            "Tối ưu hóa quy trình": "Tối ưu hóa quy trình",
-            "Phân tích & Trực quan hóa dữ liệu": "Phân tích & Trực quan hóa dữ liệu",
+            "Process Optimization": "Process Optimization",
+            "Data Analysis & Visualization": "Data Analysis & Visualization",
             "Logistics": "Logistics",
-            "Thiết kế giải pháp": "Thiết kế giải pháp",
+            "Solution Design": "Solution Design",
         };
 
         function renderSkillTags(skills) {
             return skills.map(skill => skillLabelMap[skill] || skill).join(' / ');
         }
 
-        // DỮ LIỆU THÀNH TÍCH SỐ HOÁ
+        // Project and achievement content in English
         const achievementData = [
     {
-        title: "Giải Khuyến khích KH&CN Cấp Bộ",
-        org: "Bộ Giáo dục và Đào tạo & VIFOTEC",
+        title: "Ministry-Level Encouragement Award in Science & Technology",
+        org: "Ministry of Education and Training & VIFOTEC",
         date: "01/2026",
         icon: "fa-solid fa-trophy",
         image: "Thanh tich/Khuyen khich/GiaiKK.jpg",
         bgImage: "Thanh tich/Khuyen khich/GiaiKK.jpg",
         pdf: "Thanh tich/Khuyen khich/GiaiKK_KHCN2025.pdf",
         desc: [
-            "Tìm kiếm các nghiên cứu đi trước và xây dựng hệ thống giả thuyết khoa học.",
-            "Ứng dụng mô hình cấu trúc tuyến tính SEM kiểm định giả thuyết và thảo luận các kết quả về hành vi sử dụng hệ sinh thái xe điện thông minh Green SM tại TP.HCM."
+            "Framed the research around emerging studies and built a structured scientific hypothesis foundation.",
+            "Applied SEM to examine how Green SM’s smart electric mobility ecosystem is perceived and used in Ho Chi Minh City."
         ]
     },
     {
-        title: "Giải A Nhà nghiên cứu trẻ UEH 2025",
-        org: "Trường Đại học Kinh tế TP. Hồ Chí Minh",
+        title: "UEH Young Researcher Excellence Award 2025",
+        org: "University of Economics Ho Chi Minh City",
         date: "2025",
         icon: "fa-solid fa-medal",
         image: "Thanh tich/Giai A/GiaiA.jpg",
         bgImage: "Thanh tich/Giai A/GiaiA.jpg",
         desc: [
-            "Vượt qua các vòng phản biện nghiêm ngặt từ Hội đồng Khoa học cấp Trường để đạt thứ hạng cao nhất.",
-            "Chứng minh năng lực tư duy định lượng độc lập và kỹ năng phân tích dữ liệu nghiên cứu sơ cấp xuất sắc."
+            "Passed a rigorous series of review rounds from the university scientific committee to secure the highest recognition.",
+            "Demonstrated strong independent quantitative reasoning and high-quality primary research analysis."
         ]
     },
     {
-        title: "Vòng Tứ kết Toàn quốc SCHALLENGE 2025",
-        org: "Cuộc thi Chiến lược Xuyên biên giới - Đội FOURTUNES",
+        title: "SCHALLENGE 2025 National Quarterfinalist",
+        org: "Cross-Border Strategy Competition – Team FOURTUNES",
         date: "11/2025",
         icon: "fa-solid fa-award",
         image: "Thanh tich/Nessie/nessie.png",
         bgImage: "Thanh tich/Nessie/nessie.png",
         desc: [
-            "Giải quyết bài toán chuỗi cung ứng thực tế tầm vĩ mô của tập đoàn Nessie liên quan đến xu hướng chuyển đổi bao bì bền vững.",
-            "Khai thác lý thuyết chuỗi giá trị Porter và mô hình SCOR để xây dựng giải pháp tối ưu tổng chi phí (Total landed cost)."
+            "Addressed a large-scale supply chain challenge linked to Nessie’s sustainable packaging transition.",
+            "Used Porter’s value chain framework and the SCOR model to build a cost-optimized solution strategy."
         ]
     },
     {
-        title: "Kỷ yếu Hội thảo ICECH 2024",
-        org: "Hội thảo Khoa học Quốc tế",
+        title: "ICECH 2024 Conference Proceedings",
+        org: "International Scientific Conference",
         date: "11/2024",
         icon: "fa-solid fa-square-poll-vertical",
         image: "Thanh tich/Icech/icech1.png",
         bgImage: "Thanh tich/Icech/icech1.png",
         pdf: "Thanh tich/Icech/icech.pdf",
         desc: [
-            "Xử lý, làm sạch và trực quan hóa dữ liệu phục vụ viết báo cáo khoa học.",
-            "Đề tài nghiên cứu vinh dự nhận lời mời xuất bản chính thức trên Tạp chí Khoa học Đại học Huế."
+            "Processed, cleaned, and visualized research data for scientific reporting.",
+            "Contributed to a study invited for publication in a university research journal."
         ]
     },
     {
-        title: "Ban Tổ chức BELL'S DEBATE 2025",
-        org: "Ban Chủ nhiệm CLB Anh văn BELL - Hội Sinh viên UEH",
+        title: "BELL’S DEBATE 2025 Organizing Committee",
+        org: "BELL English Club – UEH Student Union",
         date: "09/2025",
         icon: "fa-solid fa-users-gear",
         image: "Thanh tich/Bell Debate/belldebate.png",
         bgImage: "Thanh tich/Bell Debate/belldebate.png",
         pdf: "Thanh tich/Bell Debate/belldebate.pdf",
         desc: [
-            "Đảm nhận vai trò Thành viên Ban Tổ chức (Member of Organization Board) điều phối giải đấu tranh biện lớn.",
-            "Phối hợp quản lý dòng công việc, hậu cần sự kiện chuyên nghiệp và giao tiếp hoàn toàn bằng Tiếng Anh."
+            "Served as a member of the organizing board for a major debate event.",
+            "Coordinated event workflow, logistics, and communication in English throughout the competition."
         ]
     },
     {
-        title: "Chứng chỉ Quốc tế Microsoft Office Specialist (MOS)",
+        title: "Microsoft Office Specialist (MOS) International Certification",
         org: "Microsoft Corporation (ID: 9Jw7-sFpP)",
         date: "10/2023",
         icon: "fa-solid fa-file-code",
@@ -1090,36 +1146,89 @@
         pdf: "Thanh tich/MOS/MOS.pdf",
         bgImage: "Thanh tich/MOS/MOS.png",
         desc: [
-            "Đạt chứng chỉ quốc tế chứng nhận năng lực sử dụng chuyên nghiệp các công cụ văn phòng Microsoft (Excel, Word, PowerPoint).",
-            "Nền tảng kỹ thuật cốt lõi giúp số hóa, xử lý, làm sạch cấu trúc dữ liệu và tối ưu báo cáo vận hành."
+            "Earned an international credential validating strong proficiency in Microsoft Office tools such as Excel, Word, and PowerPoint.",
+            "Built a strong technical foundation for data organization, reporting, and analytical workflow support."
         ]
     },
     {
-        title: "Ban Tài chính - Hậu cần Mùa Hè Xanh 2024",
-        org: "Chiến dịch Tình nguyện UEH",
+        title: "Finance & Logistics Team, Green Summer 2024",
+        org: "UEH Volunteer Campaign",
         date: "06/2024",
         icon: "fa-solid fa-hands-holding-child",
         image: "Thanh tich/Mua he xanh/mhx.JPG",
         bgImage: "Thanh tich/Mua he xanh/mhx.JPG",
         pdf: "Du an/Mua he xanh/MHX.pdf",
         desc: [
-            "Thiết lập dự toán ngân sách chi tiết và kiểm soát toàn bộ hậu cần tại các địa phương.",
-            "Đảm bảo an toàn tài chính và điều phối phân bổ tài nguyên chính xác 100%."
+            "Developed detailed budget planning and oversight for logistics across multiple community locations.",
+            "Helped maintain financial discipline and ensure smooth resource allocation throughout the campaign."
         ]
     },
     {
-        title: "Á quân Cuộc thi Tư duy Phản biện Hóa ra là Z! Mùa 3",
-        org: "CLB Tư duy Phản biện UEH (CTC)",
+        title: "Runner-Up, HRLZ Critical Thinking Competition Season 3",
+        org: "UEH Critical Thinking Club (CTC)",
         date: "2025",
         icon: "fa-solid fa-microphone-lines",
         image: "Thanh tich/HRLZ/hrlz.jpg",
         bgImage: "Thanh tich/HRLZ/hrlz.jpg",
         desc: [
-            "Xuất sắc đạt danh hiệu Á quân chung cuộc tại cuộc thi Hùng biện phản biện HRLZ3!.",
-            "Minh chứng cho tư duy logic sắc bén, khả năng phân tích vấn đề đa chiều và kỹ năng thuyết phục đối tác hiệu quả."
+            "Finished as the overall runner-up in the HRLZ debate and critical thinking competition.",
+            "Showcased logical reasoning, multi-perspective analysis, and persuasive communication skills."
         ]
     }
 ];
+
+        let revealObserver = null;
+
+        function initRevealElements() {
+            const revealItems = Array.from(document.querySelectorAll('.reveal'));
+            if (!revealItems.length) return;
+
+            if (revealObserver) {
+                revealObserver.disconnect();
+            }
+
+            revealItems.forEach((item, index) => {
+                item.style.transitionDelay = `${Math.min(index * 70, 250)}ms`;
+                item.classList.remove('is-visible');
+            });
+
+            if ('IntersectionObserver' in window) {
+                revealObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            revealObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.16 });
+
+                revealItems.forEach(item => revealObserver.observe(item));
+            } else {
+                revealItems.forEach(item => item.classList.add('is-visible'));
+            }
+        }
+
+        function initParallax() {
+            const layers = document.querySelectorAll('.parallax-layer');
+            if (!layers.length) return;
+
+            const updateParallax = () => {
+                const scrollY = window.scrollY;
+                layers.forEach((layer, index) => {
+                    const rect = layer.getBoundingClientRect();
+                    const offset = Math.max(-14, Math.min(14, ((scrollY + window.innerHeight * 0.25) - (rect.top + scrollY)) * 0.05 * (index % 2 === 0 ? 1 : 0.6)));
+                    layer.style.transform = `translate3d(0, ${offset}px, 0)`;
+                });
+            };
+
+            window.addEventListener('scroll', updateParallax, { passive: true });
+            updateParallax();
+        }
+
+        function refreshMotionEffects() {
+            initRevealElements();
+            window.dispatchEvent(new Event('scroll'));
+        }
 
         // LOGIC CHUYỂN TAB ĐỘC LẬP (SPA ARCHITECTURE)
         function switchTab(tabId) {
@@ -1142,6 +1251,7 @@
             }
             window.scrollTo(0,0);
             closeMobileMenu();
+            requestAnimationFrame(() => refreshMotionEffects());
         }
 
         function toggleMobileMenu() {
@@ -1156,7 +1266,7 @@
         function renderMainProjects() {
             const grid = document.getElementById('main-projects-grid');
             grid.innerHTML = projectData.map(p => `
-                <div class="project-card" onclick="openProjectPopup('${p.id}')">
+                <div class="project-card reveal" onclick="openProjectPopup('${p.id}')">
                     <div class="project-img-holder">
                         ${p.thumb ? `<img src="${p.thumb}" alt="${p.title} ảnh bìa">` : '<i class="fa-solid fa-folder-open"></i>'}
                     </div>
@@ -1167,19 +1277,20 @@
                             <p>${p.short}</p>
                         </div>
                         <div class="project-card-footer">
-                            <span>Chi tiết đề án</span>
+                            <span>View project</span>
                             <i class="fa-solid fa-chevron-right"></i>
                         </div>
                     </div>
                 </div>
             `).join('');
+            refreshMotionEffects();
         }
 
         // SINH MÃ THÀNH TÍCH (VUỐT NGANG)
         function renderAchievements() {
             const box = document.getElementById('achievements-scroll-box');
             box.innerHTML = achievementData.map((a, idx) => `
-                <div class="achievement-item-card" onclick="openAchievementPopup(${idx})">
+                <div class="achievement-item-card reveal" onclick="openAchievementPopup(${idx})">
                     <div class="achievement-img-wrapper" ${a.bgImage ? `style="background-image: url('${a.bgImage}'); background-size: cover; background-position: center; background-blend-mode: overlay;"` : ''}>
                         ${a.image ? `<img src="${a.image}" alt="${a.title}">` : `<i class="${a.icon}"></i>`}
                     </div>
@@ -1190,6 +1301,7 @@
                     </div>
                 </div>
             `).join('');
+            refreshMotionEffects();
         }
 
         // INTERACTION: LỌC DỰ ÁN THEO KỸ NĂNG
@@ -1200,14 +1312,14 @@
 
             const matched = projectData.filter(p => p.skills.includes(skillKey));
             
-            heading.innerText = `Kết quả lọc: Tìm thấy ${matched.length} dự án liên quan đến kỹ năng này`;
+            heading.innerText = `Filter results: Found ${matched.length} projects related to this skill`;
             zone.style.display = 'block';
 
             if(matched.length === 0) {
-                filteredGrid.innerHTML = `<p style="padding: 20px; color: var(--text-muted);">Chưa có dự án nào được gán nhãn kỹ năng này.</p>`;
+                filteredGrid.innerHTML = `<p style="padding: 20px; color: var(--text-muted);">No projects have been tagged with this skill yet.</p>`;
             } else {
                 filteredGrid.innerHTML = matched.map(p => `
-                    <div class="project-card" onclick="openProjectPopup('${p.id}')">
+                    <div class="project-card reveal" onclick="openProjectPopup('${p.id}')">
                         <div class="project-img-holder" style="background: linear-gradient(135deg, var(--accent) 0%, #3b82f6 100%);">
                             ${p.thumb ? `<img src="${p.thumb}" alt="${p.title} ảnh bìa">` : '<i class="fa-solid fa-circle-nodes"></i>'}
                         </div>
@@ -1218,7 +1330,7 @@
                                 <p>${p.short}</p>
                             </div>
                             <div class="project-card-footer">
-                                <span>Chi tiết đề án</span>
+                                <span>View project</span>
                                 <i class="fa-solid fa-chevron-right"></i>
                             </div>
                         </div>
@@ -1227,6 +1339,7 @@
             }
             // Tự cuộn nhẹ xuống khu vực kết quả lọc để người dùng nhìn thấy
             zone.scrollIntoView({ behavior: 'smooth' });
+            requestAnimationFrame(() => refreshMotionEffects());
         }
 
         function resetSkillFilter() {
@@ -1245,7 +1358,7 @@
                     <h4 style="margin-top:18px;"><i class="fa-solid fa-film"></i> Video đề xuất</h4>\
                     <video controls preload="metadata" playsinline poster="vinamilk.png" class="modal-pdf">\
                         <source src="${videoUrl}" type="video/mp4">\
-                        Trình duyệt của bạn không hỗ trợ phát video này.\
+                        Your browser does not support this video format.\
                     </video>\
                     <p style="margin-top:8px;"><a href="${videoUrl}" target="_blank" style="font-weight:700; color:var(--accent);">Mở video trong tab mới</a></p>\
                 `;
@@ -1257,7 +1370,7 @@
                 pdfHtml = `\
                     <h4 style="margin-top:18px;"><i class="fa-solid fa-file-pdf"></i> Báo cáo (PDF)</h4>\
                     <iframe src="${pdfUrl}" class="modal-pdf"></iframe>\
-                    <p style="margin-top:8px;"><a href="${pdfUrl}" target="_blank" style="font-weight:700; color:var(--accent);">Mở file trong tab mới</a></p>\
+                    <p style="margin-top:8px;"><a href="${pdfUrl}" target="_blank" style="font-weight:700; color:var(--accent);">Open file in a new tab</a></p>\
                 `;
             }
 
@@ -1265,8 +1378,8 @@
             if(p.doc) {
                 const docUrl = encodeURI(p.doc);
                 docHtml = `\
-                    <h4 style="margin-top:18px;"><i class="fa-solid fa-file-word"></i> Tài liệu Word</h4>\
-                    <p style="margin-top:8px;"><a href="${docUrl}" target="_blank" rel="noopener" style="font-weight:700; color:var(--accent);">Mở tài liệu Word</a></p>\
+                    <h4 style="margin-top:18px;"><i class="fa-solid fa-file-word"></i> Word document</h4>\
+                    <p style="margin-top:8px;"><a href="${docUrl}" target="_blank" rel="noopener" style="font-weight:700; color:var(--accent);">Open Word document</a></p>\
                 `;
             }
 
@@ -1285,11 +1398,11 @@
                 ${imageHtml}
                 <h3>${p.title}</h3>
                 <div class="modal-meta">${p.sub}</div>
-                <h4><i class="fa-solid fa-crosshairs"></i> Đóng góp & Hành động cốt lõi:</h4>
+                <h4><i class="fa-solid fa-crosshairs"></i> Key contributions & actions:</h4>
                 <ul>
                     ${p.actions.map(act => `<li>${act}</li>`).join('')}
                 </ul>
-                <h4 style="margin-top:20px;"><i class="fa-solid fa-check-double"></i> Kết quả nổi bật:</h4>
+                <h4 style="margin-top:20px;"><i class="fa-solid fa-check-double"></i> Notable results:</h4>
                 <ul>
                     ${p.results ? p.results.map(line => `<li>${line}</li>`).join('') : ''}
                 </ul>
@@ -1320,11 +1433,11 @@
             if(a.pdf) {
                 const pdfUrl = encodeURI(a.pdf);
                 pdfHtml = `
-                    <h4 style="margin-top:18px;"><i class="fa-solid fa-file-pdf"></i> Chứng chỉ / Tài liệu</h4>
+                    <h4 style="margin-top:18px;"><i class="fa-solid fa-file-pdf"></i> Certificate / Document</h4>
                     <object data="${pdfUrl}" type="application/pdf" width="100%" height="420">
-                        <p style="padding: 20px 0; color: var(--text-muted);">Trình duyệt của bạn không hỗ trợ hiển thị PDF trực tiếp. <a href="${pdfUrl}" target="_blank" rel="noopener" style="font-weight:700; color:var(--accent);">Mở file trong tab mới</a> hoặc tải về để xem.</p>
+                        <p style="padding: 20px 0; color: var(--text-muted);">Your browser does not support inline PDF preview. <a href="${pdfUrl}" target="_blank" rel="noopener" style="font-weight:700; color:var(--accent);">Open the file in a new tab</a> or download it to view.</p>
                     </object>
-                    <p style="margin-top:8px;"><a href="${pdfUrl}" target="_blank" rel="noopener" style="font-weight:700; color:var(--accent);">Mở file chứng chỉ / tài liệu trong tab mới</a></p>
+                    <p style="margin-top:8px;"><a href="${pdfUrl}" target="_blank" rel="noopener" style="font-weight:700; color:var(--accent);">Open certificate / document in a new tab</a></p>
                 `;
             }
 
@@ -1332,7 +1445,7 @@
                 ${imageHtml}
                 <h3>${a.title}</h3>
                 <div class="modal-meta">${a.org} (${a.date})</div>
-                <h4><i class="fa-solid fa-square-check"></i> Kết quả & Mô tả thực tế:</h4>
+                <h4><i class="fa-solid fa-square-check"></i> Outcomes & practical description:</h4>
                 <ul>
                     ${a.desc.map(line => `<li>${line}</li>`).join('')}
                 </ul>
@@ -1350,6 +1463,8 @@
         window.onload = function() {
             renderMainProjects();
             renderAchievements();
+            initParallax();
+            refreshMotionEffects();
         }
     </script>
 </body>
