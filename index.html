@@ -21,7 +21,7 @@
             --primary: #0f172a;
             --accent: #2563eb;
             --accent-light: #eff6ff;
-            --bg-site: #f8fafc;
+            --bg-site: #ffffff;
             --text-dark: #1e293b;
             --text-muted: #64748b;
             --white: #ffffff;
@@ -33,45 +33,10 @@
             scroll-behavior: smooth;
         }
         body {
-            background:
-                radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 26%),
-                radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.18), transparent 24%),
-                var(--bg-site);
+            background-color: var(--white);
             color: var(--text-dark);
             overflow-x: hidden;
             line-height: 1.6;
-            position: relative;
-        }
-        .ambient-bg {
-            position: fixed;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: -2;
-        }
-        .bg-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(70px);
-            opacity: 0.28;
-            animation: drift 16s ease-in-out infinite alternate;
-        }
-        .orb-1 { width: 330px; height: 330px; background: #60a5fa; top: -80px; left: -90px; }
-        .orb-2 { width: 280px; height: 280px; background: #2563eb; top: 16%; right: -80px; animation-duration: 18s; }
-        .orb-3 { width: 240px; height: 240px; background: #818cf8; bottom: 8%; left: 20%; animation-duration: 20s; }
-        @keyframes drift {
-            from { transform: translate3d(0, 0, 0) scale(1); }
-            to { transform: translate3d(28px, -24px, 0) scale(1.08); }
-        }
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            width: 0%;
-            background: linear-gradient(90deg, var(--accent), #60a5fa);
-            z-index: 1100;
-            box-shadow: 0 0 12px rgba(37, 99, 235, 0.35);
         }
         .reveal {
             opacity: 0;
@@ -82,10 +47,6 @@
         .reveal.is-visible {
             opacity: 1;
             transform: translateY(0);
-        }
-        .parallax-layer {
-            will-change: transform;
-            transition: transform 0.2s linear;
         }
         @keyframes textShimmer {
             0% { background-position: 0% 50%; }
@@ -100,6 +61,190 @@
             color: transparent;
             animation: textShimmer 6s linear infinite;
         }
+        ::selection {
+            background-color: rgba(37, 99, 235, 0.2);
+            color: var(--primary);
+        }
+
+        .page-content {
+            padding: 110px 24px 60px 24px;
+        }
+        .section-panel {
+            position: relative;
+        }
+        .section-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(37, 99, 235, 0.12);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+        }
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 28px;
+        }
+        .primary-btn, .secondary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            padding: 12px 20px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+        .primary-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, #3b82f6 100%);
+            color: var(--white);
+            box-shadow: 0 16px 35px rgba(37, 99, 235, 0.25);
+        }
+        .secondary-btn {
+            background-color: rgba(255,255,255,0.9);
+            color: var(--primary);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+        }
+        .primary-btn:hover, .secondary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+        }
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 30px;
+            max-width: 560px;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+        }
+        .stat-card strong {
+            display: block;
+            color: var(--primary);
+            font-size: 1.15rem;
+            margin-bottom: 4px;
+        }
+        .stat-card span {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .hero-visual-card {
+            position: relative;
+            width: 100%;
+        }
+        .hero-floating-card {
+            position: absolute;
+            left: 24px;
+            bottom: 24px;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            border-radius: 18px;
+            padding: 16px 18px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 16px 35px rgba(15, 23, 42, 0.12);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 220px;
+        }
+        .hero-floating-card strong {
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+        .hero-floating-card span {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal-on-scroll.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .about-left {
+            background: rgba(255,255,255,0.72);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 28px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+        .project-card, .achievement-item-card, .skill-group-box, .contact-layout {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .project-card:hover, .achievement-item-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px rgba(15, 23, 42, 0.12);
+        }
+        .contact-layout {
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-layout::before {
+            content: '';
+            position: absolute;
+            inset: -30px auto auto -20px;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(37,99,235,0.15), transparent 70%);
+            pointer-events: none;
+        }
+        .back-to-top {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            box-shadow: 0 16px 35px rgba(15, 23, 42, 0.2);
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            z-index: 1500;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .back-to-top:hover {
+            transform: translateY(-3px);
+        }
 
         /* --- LAYOUT ĐỘC LẬP (SPA ARCHITECTURE) --- */
         .app-container {
@@ -111,7 +256,7 @@
             flex: 1;
             display: flex;
             align-items: center;
-            padding: 80px 24px 40px 24px;
+            padding: 110px 24px 60px 24px;
             max-width: 1200px;
             width: 100%;
             margin: 0 auto;
@@ -231,13 +376,13 @@
         .hero-layout {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            align-items: flex-start;
+            align-items: center; /* center hero left/right vertically */
             gap: 48px;
             width: 100%;
             min-height: calc(100vh - 140px);
         }
         .hero-left {
-            margin-top: 60px;
+            margin-top: 0; /* remove extra top offset so columns align */
         }
         .hero-left h1 {
             font-size: 4rem;
@@ -297,11 +442,11 @@
             display: flex;
             justify-content: center;
             align-items: stretch;
-            background-color: var(--bg-site);
+            background-color: transparent;
             border-radius: 0 32px 32px 0;
             overflow: hidden;
-            margin-bottom: -40px;
-            padding-bottom: 40px;
+            margin-bottom: 0; /* normalize vertical spacing */
+            padding-bottom: 0;
         }
         .hero-no-frame-img {
             width: 100%;
@@ -733,18 +878,19 @@
             position: relative;
             transform: scale(0.95);
             transition: transform 0.3s ease;
-            max-height: 90vh;
-            overflow-y: auto;
+            max-height: 560px; /* cap to avoid huge images */
+            min-height: 360px; /* ensure reasonable minimum */
         }
         .modal-pdf {
             width: 100%;
             height: 420px;
-            border: none;
-            margin-top: 18px;
-            border-radius: 8px;
-            box-shadow: 0 8px 20px rgba(2,6,23,0.08);
+        .hero-no-frame-img img.hero-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center; /* center image vertically */
+            display: block;
         }
-        .modal-overlay.open .modal-box {
             transform: scale(1);
         }
         .modal-close-btn {
@@ -846,19 +992,6 @@
     </style>
 </head>
 <body>
-    <div class="ambient-bg" aria-hidden="true">
-        <span class="bg-orb orb-1"></span>
-        <span class="bg-orb orb-2"></span>
-        <span class="bg-orb orb-3"></span>
-    </div>
-    <div class="scroll-progress" id="scroll-progress"></div>
-    <div class="ambient-bg" aria-hidden="true">
-        <span class="bg-orb orb-1"></span>
-        <span class="bg-orb orb-2"></span>
-        <span class="bg-orb orb-3"></span>
-    </div>
-    <div class="scroll-progress" id="scroll-progress"></div>
-
     <div class="app-container">
         <header>
             <div class="navbar">
@@ -881,19 +1014,45 @@
 
             <div id="hero" class="section-panel active">
                 <div class="hero-layout">
-                    <div class="hero-left reveal">
-                        <h1>Hi, I'm Tuan</h1>
-                        <div class="job-title">Human Resource Intern</div>
-                        <p>Bridging data-driven insights and business operations to optimize human capital and empower organizational growth.</p>
-                        <div class="social-links">
-                            <a href="https://www.linkedin.com/in/trantuan05/" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
-                            <a href="https://github.com/tuantran31231023529-UEH" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i></a>
-                            <a href="https://www.facebook.com/tuantran.mid.autumn/" target="_blank" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                    <div class="hero-left reveal-on-scroll">
+                        <div class="hero-badge"><i class="fa-solid fa-sparkles"></i> Open to HR & people analytics roles</div>
+                        <h1>Hi, I'm Tuấn</h1>
+                        <div class="job-title">Human Resources Intern</div>
+                        <p>Mình kết hợp tư duy định lượng, phân tích dữ liệu và hiểu biết về con người để nâng cao hiệu quả nhân sự, văn hóa tổ chức và trải nghiệm nhân viên.</p>
+                        <div class="hero-actions">
+                            <a href="#contact" class="primary-btn"><i class="fa-solid fa-paper-plane"></i> Kết nối ngay</a>
+                            <button class="secondary-btn" onclick="switchTab('projects')"><i class="fa-solid fa-arrow-right"></i> Xem dự án</button>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="stat-card">
+                                <strong>8+</strong>
+                                <span>Dự án thực chiến</span>
+                            </div>
+                            <div class="stat-card">
+                                <strong>3</strong>
+                                <span>Giải thưởng nổi bật</span>
+                            </div>
+                            <div class="stat-card">
+                                <strong>2+</strong>
+                                <span>Năm phát triển</span>
+                            </div>
+                        </div>
+                        <div class="social-links" style="margin-top: 24px;">
+                            <a href="https://linkedin.com" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="https://github.com" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://facebook.com" target="_blank" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
                         </div>
                     </div>
-                    <div class="hero-right parallax-layer">
-                        <div class="hero-no-frame-img">
-                            <img src="Trang chu/Ngoi-doi-dien.png" alt="Avatar Trần Phú Anh Tuấn" class="hero-avatar">
+                    <div class="hero-right reveal-on-scroll">
+                        <div class="hero-visual-card">
+                            <div class="hero-no-frame-img">
+                                <img src="Trang chu/Ngoi-doi-dien.png" alt="Avatar Trần Phú Anh Tuấn" class="hero-avatar">
+                            </div>
+                            <div class="hero-floating-card">
+                                <strong>Focus areas</strong>
+                                <span>People • Analytics • Engagement</span>
+                                <span>Cultural design • Problem solving</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -912,7 +1071,7 @@
                         </ul>
                     </div>
                     <div class="about-right reveal">
-                        <div class="about-right-placeholder parallax-layer">
+                        <div class="about-right-placeholder">
                             <img src="Ve toi/ngoi-lam-viec.png" alt="Ngồi làm việc - Trần Phú Anh Tuấn">
                         </div>
                     </div>
@@ -1002,6 +1161,10 @@
         </div>
     </div>
 
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Quay về đầu trang">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
     <script>
         // DỮ LIỆU ĐỀ ÁN SỐ HOÁ CHUẨN XỊN
         const projectData = [
@@ -1027,13 +1190,13 @@
             },
             {
                 id: "p2",
-                title: "Vinamilk Operations & Coordination Analysis",
-                sub: "Course: Global Supply Chain Management (Grade: A+)",
+                title: "Vinamilk People & Coordination Analysis",
+                sub: "Course: People and Organization Management (Grade: A+)",
                 tag: "Process Improvement / Employee Coordination",
                 thumb: "Du an/Vinamilk/vinamilk.png",
                 bgImage: "Du an/Vinamilk/vinamilk.png",
                 video: "Du an/Vinamilk/Tuan-de-xuat-giai-phap.mp4",
-                short: "Assessed Vinamilk’s operational model and proposed ways to strengthen cross-functional coordination and workflow resilience.",
+                short: "Assessed Vinamilk’s people coordination and proposed ways to strengthen cross-functional collaboration and workflow resilience.",
                 skills: ["Process Improvement", "Employee Coordination"],
                 actions: [
                     "Mapped Vinamilk’s competitive position using a strategic business lens tailored to its market context.",
@@ -1081,7 +1244,7 @@
                     "Refined a proposal for improving operational alignment and execution performance."
                 ],
                 results: [
-                    "Presented a more optimized international supply chain model.",
+                    "Presented a more optimized international coordination model.",
                     "Advanced through the competition rounds and earned a place in the national quarterfinal stage."
                 ]
             },
@@ -1211,7 +1374,7 @@
         image: "Thanh tich/Nessie/nessie.png",
         bgImage: "Thanh tich/Nessie/nessie.png",
         desc: [
-            "Addressed a large-scale supply chain challenge linked to Nessie’s sustainable packaging transition.",
+            "Addressed a large-scale organizational challenge linked to Nessie’s sustainable packaging transition.",
             "Used Porter’s value chain framework and the SCOR model to build a cost-optimized solution strategy."
         ]
     },
@@ -1238,7 +1401,7 @@
         pdf: "Thanh tich/Bell Debate/belldebate.pdf",
         desc: [
             "Served as a member of the organizing board for a major debate event.",
-            "Coordinated event workflow, logistics, and communication in English throughout the competition."
+            "Coordinated event workflow, people support, and communication in English throughout the competition."
         ]
     },
     {
@@ -1255,7 +1418,7 @@
         ]
     },
     {
-        title: "Finance & Logistics Team, Green Summer 2024",
+        title: "Finance & Operations Team, Green Summer 2024",
         org: "UEH Volunteer Campaign",
         date: "06/2024",
         icon: "fa-solid fa-hands-holding-child",
@@ -1263,7 +1426,7 @@
         bgImage: "Thanh tich/Mua he xanh/mhx.JPG",
         pdf: "Du an/Mua he xanh/MHX.pdf",
         desc: [
-            "Developed detailed budget planning and oversight for logistics across multiple community locations.",
+            "Developed detailed budget planning and oversight for community operations across multiple locations.",
             "Helped maintain financial discipline and ensure smooth resource allocation throughout the campaign."
         ]
     },
@@ -1329,23 +1492,6 @@
             }
         }
 
-        function initParallax() {
-            const layers = document.querySelectorAll('.parallax-layer');
-            if (!layers.length) return;
-
-            const updateParallax = () => {
-                const scrollY = window.scrollY;
-                layers.forEach((layer, index) => {
-                    const rect = layer.getBoundingClientRect();
-                    const offset = Math.max(-14, Math.min(14, ((scrollY + window.innerHeight * 0.25) - (rect.top + scrollY)) * 0.05 * (index % 2 === 0 ? 1 : 0.6)));
-                    layer.style.transform = `translate3d(0, ${offset}px, 0)`;
-                });
-            };
-
-            window.addEventListener('scroll', updateParallax, { passive: true });
-            updateParallax();
-        }
-
         function refreshMotionEffects() {
             initRevealElements();
             initTiltEffects();
@@ -1378,13 +1524,6 @@
 
         function toggleMobileMenu() {
             document.querySelector('.nav-menu').classList.toggle('open');
-        }
-
-        function updateScrollProgress() {
-            const scrollTop = window.scrollY;
-            const height = document.documentElement.scrollHeight - window.innerHeight;
-            const percent = height > 0 ? (scrollTop / height) * 100 : 0;
-            document.getElementById('scroll-progress').style.width = `${Math.min(100, Math.max(0, percent))}%`;
         }
 
         function closeMobileMenu() {
@@ -1588,14 +1727,37 @@
             document.getElementById('detail-modal').classList.remove('open');
         }
 
+        // UI ENHANCEMENTS
+        const revealElements = document.querySelectorAll('.reveal-on-scroll');
+        if ('IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+        } else {
+            revealElements.forEach(el => el.classList.add('in-view'));
+        }
+
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
         // KHỞI CHẠY KHỬ ĐỘNG ỨNG DỤNG
         window.onload = function() {
             renderMainProjects();
             renderAchievements();
-            initParallax();
             refreshMotionEffects();
-            updateScrollProgress();
-            window.addEventListener('scroll', updateScrollProgress, { passive: true });
         }
     </script>
 </body>
