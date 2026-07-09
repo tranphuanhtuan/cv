@@ -370,9 +370,9 @@
             border-radius: 2px;
         }
 
-        /* ==========================================
-           TRANG 1: TRANG CHỦ (HERO)
-        ========================================== */
+          /* ==========================================
+              PAGE 1: HOME (HERO)
+          ========================================== */
         .hero-layout {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
@@ -568,9 +568,9 @@
             display: block;
         }
 
-        /* ==========================================
-           TRANG 3: DỰ ÁN (PROJECTS)
-        ========================================== */
+          /* ==========================================
+              PAGE 3: PROJECTS
+          ========================================== */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -659,9 +659,9 @@
             color: var(--accent);
         }
 
-        /* ==========================================
-           TRANG 4: KỸ NĂNG (SKILLS + INTERACTION)
-        ========================================== */
+          /* ==========================================
+              PAGE 4: SKILLS (INTERACTION)
+          ========================================== */
         .skills-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -709,7 +709,7 @@
             border-color: var(--accent);
             transform: translateY(-2px);
         }
-        /* Khu vực hiển thị kết quả lọc dự án liên quan */
+        /* Area showing filtered project results */
         .filtered-results-area {
             margin-top: 40px;
             border-top: 1px dashed #cbd5e1;
@@ -733,9 +733,9 @@
             cursor: pointer;
         }
 
-        /* ==========================================
-           TRANG 5: THÀNH TÍCH (ACHIEVEMENTS - HORIZONTAL LIST)
-        ========================================== */
+          /* ==========================================
+              PAGE 5: ACHIEVEMENTS (HORIZONTAL LIST)
+          ========================================== */
         .horizontal-scroll-container {
             display: flex;
             gap: 24px;
@@ -800,9 +800,9 @@
             color: var(--text-muted);
         }
 
-        /* ==========================================
-           TRANG 6: LIÊN HỆ (CONTACT)
-        ========================================== */
+          /* ==========================================
+              PAGE 6: CONTACT
+          ========================================== */
         .contact-layout {
             max-width: 650px;
             margin: 0 auto;
@@ -1016,25 +1016,25 @@
                 <div class="hero-layout">
                     <div class="hero-left reveal-on-scroll">
                         <div class="hero-badge"><i class="fa-solid fa-sparkles"></i> Open to HR & people analytics roles</div>
-                        <h1>Hi, I'm Tuấn</h1>
-                        <div class="job-title">Human Resources Intern</div>
-                        <p>Mình kết hợp tư duy định lượng, phân tích dữ liệu và hiểu biết về con người để nâng cao hiệu quả nhân sự, văn hóa tổ chức và trải nghiệm nhân viên.</p>
+                            <h1>Hi, I'm Tuấn</h1>
+                            <div class="job-title">Human Resources Intern</div>
+                            <p>I combine quantitative thinking, data analysis and human-centered insight to improve HR effectiveness, organizational culture, and employee experience.</p>
                         <div class="hero-actions">
-                            <a href="#contact" class="primary-btn"><i class="fa-solid fa-paper-plane"></i> Kết nối ngay</a>
-                            <button class="secondary-btn" onclick="switchTab('projects')"><i class="fa-solid fa-arrow-right"></i> Xem dự án</button>
+                            <a href="#contact" class="primary-btn"><i class="fa-solid fa-paper-plane"></i> Get in touch</a>
+                            <button class="secondary-btn" onclick="switchTab('projects')"><i class="fa-solid fa-arrow-right"></i> View projects</button>
                         </div>
                         <div class="hero-stats">
                             <div class="stat-card">
                                 <strong>8+</strong>
-                                <span>Dự án thực chiến</span>
+                                <span>Practical projects</span>
                             </div>
                             <div class="stat-card">
                                 <strong>3</strong>
-                                <span>Giải thưởng nổi bật</span>
+                                <span>Notable awards</span>
                             </div>
                             <div class="stat-card">
                                 <strong>2+</strong>
-                                <span>Năm phát triển</span>
+                                <span>Years experience</span>
                             </div>
                         </div>
                         <div class="social-links" style="margin-top: 24px;">
@@ -1072,7 +1072,7 @@
                     </div>
                     <div class="about-right reveal">
                         <div class="about-right-placeholder">
-                            <img src="Ve toi/ngoi-lam-viec.png" alt="Ngồi làm việc - Trần Phú Anh Tuấn">
+                            <img src="Ve toi/ngoi-lam-viec.png" alt="Working - Trần Phú Anh Tuấn">
                         </div>
                     </div>
                 </div>
@@ -1530,7 +1530,7 @@
             document.querySelector('.nav-menu').classList.remove('open');
         }
 
-        // SINH MÃ THẺ DỰ ÁN TRANG DỰ ÁN TỔNG
+        // RENDER PROJECT CARDS FOR MAIN PROJECTS PAGE
         function renderMainProjects() {
             const grid = document.getElementById('main-projects-grid');
             grid.innerHTML = projectData.map(p => `
@@ -1554,7 +1554,7 @@
             refreshMotionEffects();
         }
 
-        // SINH MÃ THÀNH TÍCH (VUỐT NGANG)
+        // RENDER ACHIEVEMENTS (HORIZONTAL SCROLL)
         function renderAchievements() {
             const box = document.getElementById('achievements-scroll-box');
             box.innerHTML = achievementData.map((a, idx) => `
@@ -1572,7 +1572,7 @@
             refreshMotionEffects();
         }
 
-        // INTERACTION: LỌC DỰ ÁN THEO KỸ NĂNG
+        // INTERACTION: FILTER PROJECTS BY SKILL
         function filterProjectsBySkill(skillKey) {
             const zone = document.getElementById('filter-results-zone');
             const filteredGrid = document.getElementById('filtered-projects-grid');
@@ -1605,7 +1605,7 @@
                     </div>
                 `).join('');
             }
-            // Tự cuộn nhẹ xuống khu vực kết quả lọc để người dùng nhìn thấy
+            // Auto-scroll slightly to the filtered results area for visibility
             zone.scrollIntoView({ behavior: 'smooth' });
             requestAnimationFrame(() => refreshMotionEffects());
         }
@@ -1618,7 +1618,7 @@
         function openProjectPopup(id) {
             const p = projectData.find(item => item.id === id);
             if(!p) return;
-            // Nếu dự án có thuộc tính video, nhúng video player.
+            // If a project has a video property, embed a video player.
             let videoHtml = '';
             if(p.video) {
                 const videoUrl = encodeURI(p.video);
@@ -1631,7 +1631,7 @@
                     <p style="margin-top:8px;"><a href="${videoUrl}" target="_blank" style="font-weight:700; color:var(--accent);">Mở video trong tab mới</a></p>\
                 `;
             }
-            // Nếu dự án có thuộc tính PDF, nhúng iframe và thêm link mở trong tab mới
+            // If a project has a PDF property, embed an iframe and add a link to open in a new tab
             let pdfHtml = '';
             if(p.pdf) {
                 const pdfUrl = encodeURI(p.pdf);
